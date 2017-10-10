@@ -1,0 +1,36 @@
+<mat-toolbar class="navbar">
+  <span class="spacing"></span>
+
+  <div class="logo">
+    <img class="logoImg" src="../../../assets/logo.png" alt="gravatar"/>
+    <a class="logoLink" [routerLink]="path_home">{{config.appName}}</a>
+  </div>
+
+  <span class="spacing"></span>
+
+  <div class="userPanel">
+    <div class="userInfos">
+      <div class="nameSurname">{{ userInfos.contact.prenom }} {{ userInfos.contact.nom }}</div>
+      <div class="groupName">{{ userGroup.nom }}</div>
+    </div>
+
+    <button class="menuBtn" [style.border-color]="userInfos.contact.profil.couleur" [matMenuTriggerFor]="menu">
+      <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" alt="gravatar"/>
+    </button>
+  </div>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="router.navigate([path_profil])">
+      <mat-icon>settings</mat-icon>
+      <span>Profil</span>
+    </button>
+    <button mat-menu-item (click)="router.navigate([path_groupes])">
+      <mat-icon>swap_horiz</mat-icon>
+      <span>Groupes</span>
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Déconnexion</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
