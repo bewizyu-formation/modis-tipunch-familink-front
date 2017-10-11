@@ -1,0 +1,38 @@
+<div class="login-container">
+  <form class="login-form" (submit)="login()">
+    <div class="login-form-row">
+      <div>
+        <label>Email : </label>
+        <mat-form-field>
+          <input matInput placeholder="Saisir email" [formControl]="email" name="email" required />
+          <mat-error *ngIf="email.invalid">{{ getEmailErrorMessage() }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="login-form-row">
+      <div>
+        <label>Password : </label>
+        <mat-form-field>
+          <input matInput placeholder="Saisir password" [type]="hide ? 'password' : 'text'" [formControl]="password" required>
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-error *ngIf="password.invalid">{{ getPasswordErrorMessage() }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="login-form-row">
+      <div>
+        <a (click)="navigateToCreateAccount()">Créer un compte</a> | <a (click)="navigateToForgotPassword()">Mot de passe oublié</a>
+      </div>
+    </div>
+    <div class="login-form-row">
+      <span class="login-form-message">{{ authenticationMessage }}</span>
+    </div>
+    <div class="login-form-button">
+      <button *ngIf="!authenticating && (email.valid && password.valid)" type="submit" mat-raised-button color="primary">Valider</button>
+      <button *ngIf="!authenticating && (email.invalid || password.invalid)" type="submit" mat-raised-button color="primary" disabled>Valider</button>
+      <button *ngIf="authenticating" type="submit" mat-raised-button color="primary" disabled>Connexion en cours ...</button>
+    </div>
+
+
+  </form>
+</div>

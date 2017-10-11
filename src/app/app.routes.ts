@@ -1,12 +1,9 @@
 import { Routes } from '@angular/router';
-// import { GroupesComponent } from './routes/groupes/groupes.component';
+import { LoginComponent } from './routes/login/login.component';
+import * as PATHS from './services/navigator.service';
 
-export const PATH_HOME = '/';
-export const PATH_PROFIL = 'profil';
-export const PATH_GROUPES = 'groupes';
-export const PATH_LOGIN = 'login';
 
 
 export const ROUTES: Routes = [
-  // { path: PATH_HOME, component: GroupesComponent },
+  { path: PATHS.PATH_LOGIN, component: LoginComponent },
 ];

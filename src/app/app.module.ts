@@ -3,44 +3,60 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 /* Services */
 import { ConfigService } from './services/config.service';
+import { NavigatorService } from './services/navigator.service';
 import { AuthenticationMockService } from './services/authentication-mock.service';
+import { AuthenticationService } from './services/authentication.service';
+
+import { HeaderInterceptor } from './interceptors/header.interceptor';
 
 
 import {  MatProgressBarModule,
           MatIconModule,
           MatToolbarModule,
           MatMenuModule,
+          MatFormFieldModule,
+          MatInputModule,
+          MatButtonModule,
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { LoginComponent } from './routes/login/login.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES),
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatProgressBarModule,
     MatIconModule,
     MatToolbarModule,
     MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
   ],
   providers: [
     ConfigService,
-    { provide: AuthenticationMockService, useClass: AuthenticationMockService }
+    NavigatorService,
+    { provide: AuthenticationMockService, useClass: AuthenticationMockService },
+    { provide: AuthenticationService, useClass: AuthenticationService },
+    { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
