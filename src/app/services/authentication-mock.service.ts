@@ -51,8 +51,8 @@ export class AuthenticationMockService {
 
   destroyAuthentication(): void {
     this.isAuthenticated = false;
-    this.userInfos = null;
-    this.userOwnedGroup = null;
+    this.userInfos = new Subject<Utilisateur>();
+    this.userOwnedGroup = new Subject<Groupe>();
     window.localStorage.removeItem('token');
   }
 

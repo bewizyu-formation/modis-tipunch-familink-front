@@ -38,7 +38,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     Sub_userInfos = this.authService.userInfos.subscribe(userInfos => {
       this.userInfos = userInfos;
-      console.log(userInfos)
     });
     Sub_userOwnedGroup = this.authService.userOwnedGroup.subscribe(userOwnedGroup => {
       this.userOwnedGroup = userOwnedGroup;
