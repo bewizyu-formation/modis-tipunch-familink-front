@@ -8,29 +8,30 @@
 
   <span class="spacing"></span>
 
-  <div class="userPanel">
+  <div class="userPanel" *ngIf="authService.isAuthenticated">
     <div class="userInfos">
-      <div class="nameSurname">{{ userInfos.contact.prenom }} {{ userInfos.contact.nom }}</div>
-      <div class="groupName">{{ userGroup.nom }}</div>
+      <div class="nameSurname">{{ authService.userInfos.contact.prenom }} {{ authService.userInfos.contact.nom }}</div>
+      <div class="groupName">{{ authService.userGroup.nom }}</div>
     </div>
 
-    <button class="menuBtn" [style.border-color]="userInfos.contact.profil.couleur" [matMenuTriggerFor]="menu">
+    <button class="menuBtn" [style.border-color]="authService.userInfos.contact.profil.couleur" [matMenuTriggerFor]="menu">
       <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" alt="gravatar"/>
     </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="router.navigate([path_profil])">
+        <mat-icon>settings</mat-icon>
+        <span>Profil</span>
+      </button>
+      <button mat-menu-item (click)="router.navigate([path_groupes])">
+        <mat-icon>swap_horiz</mat-icon>
+        <span>Groupes</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Déconnexion</span>
+      </button>
+    </mat-menu>
   </div>
 
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="router.navigate([path_profil])">
-      <mat-icon>settings</mat-icon>
-      <span>Profil</span>
-    </button>
-    <button mat-menu-item (click)="router.navigate([path_groupes])">
-      <mat-icon>swap_horiz</mat-icon>
-      <span>Groupes</span>
-    </button>
-    <button mat-menu-item (click)="logout()">
-      <mat-icon>exit_to_app</mat-icon>
-      <span>Déconnexion</span>
-    </button>
-  </mat-menu>
+
 </mat-toolbar>

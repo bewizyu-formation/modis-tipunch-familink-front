@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Utilisateur } from '../models/Utilisateur';
-import {Contact} from '../models/Contact';
-import {Profil} from '../models/Profil';
-import {Groupe} from '../models/Groupe';
+import { Contact } from '../models/Contact';
+import { Profil } from '../models/Profil';
+import { Groupe } from '../models/Groupe';
 
 @Injectable()
 export class AuthenticationMockService {
+
+  public isAuthenticated = true;
+  public userInfos: Utilisateur;
+  public userGroup: Groupe;
 
   constructor() { }
 
@@ -52,5 +56,11 @@ export class AuthenticationMockService {
     });
   }
 
+  destroyAuthentication(): void {
+    this.isAuthenticated = false;
+    this.userInfos = null;
+    this.userGroup = null;
+    window.localStorage.removeItem('token');
+  }
 
 }

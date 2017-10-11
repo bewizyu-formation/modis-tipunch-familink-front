@@ -6,10 +6,6 @@ import { PATH_HOME, PATH_PROFIL, PATH_GROUPES, PATH_LOGIN } from '../../app.rout
 import { ConfigService } from '../../services/config.service';
 import { AuthenticationMockService } from '../../services/authentication-mock.service';
 
-// Models
-import { Utilisateur } from '../../models/Utilisateur';
-import { Groupe } from '../../models/Groupe';
-
 let Sub_getUserInfos;
 let Sub_getGroup;
 
@@ -26,8 +22,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   path_groupes = PATH_GROUPES;
 
   // VARS
-  userInfos: Utilisateur;
-  userGroup: Groupe;
+
 
   constructor(
     public config: ConfigService,
@@ -37,10 +32,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     Sub_getUserInfos = this.authService.getUserInfos().subscribe(userInfos => {
-      this.userInfos = userInfos;
+      this.authService.userInfos = userInfos;
     });
     Sub_getGroup = this.authService.getGroup().subscribe(userGroup => {
-      this.userGroup = userGroup;
+      this.authService.userGroup = userGroup;
     });
   }
 
@@ -50,7 +45,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    window.localStorage.removeItem('token');
+    this.authService.destroyAuthentication();
     this.router.navigate([PATH_LOGIN]);
   }
 }
