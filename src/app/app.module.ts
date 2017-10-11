@@ -6,13 +6,26 @@ import { ROUTES } from './app.routes';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+
+/* Services */
+import { ConfigService } from './services/config.service';
+import { AuthenticationMockService } from './services/authentication-mock.service';
+
+
+import {  MatProgressBarModule,
+          MatIconModule,
+          MatToolbarModule,
+          MatMenuModule,
+} from '@angular/material';
+
 import { AppComponent } from './app.component';
-import { MatProgressBarModule } from '@angular/material';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,8 +34,14 @@ import { MatProgressBarModule } from '@angular/material';
     FormsModule,
     HttpClientModule,
     MatProgressBarModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatMenuModule,
   ],
-  providers: [],
+  providers: [
+    ConfigService,
+    { provide: AuthenticationMockService, useClass: AuthenticationMockService }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

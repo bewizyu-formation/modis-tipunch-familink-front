@@ -5,6 +5,7 @@ body {
   background-color: #F7F7F7;
   color: black;
   margin: 0;
+  margin-top: 64px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
 }
@@ -21,4 +22,14 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 960px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+img {
+  max-height: 100%;
+  max-width: 100%;
 }

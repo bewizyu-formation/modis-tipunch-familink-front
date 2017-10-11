@@ -1,0 +1,62 @@
+.navbar {
+  background-color: #3F51B5;
+
+  .spacing {
+    flex: 1 1 auto;
+  }
+
+  .logo {
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    .logoImg {
+      height: 70%;
+      padding-right: 5px;
+    }
+    .logoLink {
+      font-size: 28px;
+      color: #FFFFFF;
+    }
+
+  }
+
+  .userPanel {
+    display: flex;
+    text-align: right;
+    align-items: center;
+
+    .userInfos {
+      padding-right: 10px;
+      color: #FFF;
+
+      .nameSurname {
+        font-size: 20px;
+        line-height: 20px;
+      }
+
+      .groupName {
+        font-size: 12px;
+        line-height: 16px;
+      }
+    }
+
+    .menuBtn {
+      background: transparent;
+      border: 3px solid;
+      height: 50px;
+      width: 50px;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+    }
+
+  }
+
+
+}
+
+
+
+
+
