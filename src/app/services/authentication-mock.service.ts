@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { Utilisateur } from '../models/Utilisateur';
 import { Contact } from '../models/Contact';
 import { Profil } from '../models/Profil';
 import { Groupe } from '../models/Groupe';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class AuthenticationMockService {
 
   public isAuthenticated = true;
-  public userInfos: Utilisateur;
-  public userGroup: Groupe;
+  public userInfos: Subject<Utilisateur> = new Subject<Utilisateur>();
+  public userOwnedGroup: Subject<Groupe> = new Subject<Groupe>();
+
 
   constructor() { }
 
-  getUserInfos(): Observable<Utilisateur> {
-    return new Observable(observer => {
-
-      const userSample: Utilisateur = new Utilisateur(
+  fetchUserInfos(): void {
+    this.userInfos.next(
+      new Utilisateur(
         1,
         'email@domain.com',
         'MD5PASSWORD',
@@ -34,32 +34,25 @@ export class AuthenticationMockService {
             1,
             'SENIOR',
             '#FFFF00',
-          ))
-      );
-
-      observer.next(userSample);
-      observer.complete();
-    });
+        ))
+      )
+    );
   }
 
-  getGroup(): Observable<Groupe> {
-    return new Observable(observer => {
-
-      const groupeSample: Groupe = new Groupe(
+  fetchUserOwnedGroup(): void {
+    this.userOwnedGroup.next(
+      new Groupe(
         1,
         'Nom du groupe',
         '10/10/2017 - 00:00'
-      );
-
-      observer.next(groupeSample);
-      observer.complete();
-    });
+      )
+    );
   }
 
   destroyAuthentication(): void {
     this.isAuthenticated = false;
     this.userInfos = null;
-    this.userGroup = null;
+    this.userOwnedGroup = null;
     window.localStorage.removeItem('token');
   }
 

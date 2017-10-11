@@ -6,8 +6,12 @@ import { PATH_HOME, PATH_PROFIL, PATH_GROUPES, PATH_LOGIN } from '../../app.rout
 import { ConfigService } from '../../services/config.service';
 import { AuthenticationMockService } from '../../services/authentication-mock.service';
 
-let Sub_getUserInfos;
-let Sub_getGroup;
+// Models
+import { Utilisateur } from '../../models/Utilisateur';
+import { Groupe } from '../../models/Groupe';
+
+let Sub_userInfos;
+let Sub_userOwnedGroup;
 
 @Component({
   selector: 'app-navbar',
@@ -22,7 +26,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   path_groupes = PATH_GROUPES;
 
   // VARS
-
+  userInfos: Utilisateur;
+  userOwnedGroup: Groupe;
 
   constructor(
     public config: ConfigService,
@@ -31,17 +36,25 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    Sub_getUserInfos = this.authService.getUserInfos().subscribe(userInfos => {
-      this.authService.userInfos = userInfos;
+    Sub_userInfos = this.authService.userInfos.subscribe(userInfos => {
+      this.userInfos = userInfos;
+      console.log(userInfos)
     });
-    Sub_getGroup = this.authService.getGroup().subscribe(userGroup => {
-      this.authService.userGroup = userGroup;
+    Sub_userOwnedGroup = this.authService.userOwnedGroup.subscribe(userOwnedGroup => {
+      this.userOwnedGroup = userOwnedGroup;
     });
+
+    // fetch users datas if the user is authenticated
+    if (this.authService.isAuthenticated) {
+      this.authService.fetchUserInfos();
+      this.authService.fetchUserOwnedGroup();
+    }
+
   }
 
   ngOnDestroy(): void {
-    Sub_getUserInfos.unsubscribe();
-    Sub_getGroup.unsubscribe();
+    Sub_userInfos.unsubscribe();
+    Sub_userOwnedGroup.unsubscribe();
   }
 
   logout() {
