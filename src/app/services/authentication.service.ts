@@ -15,7 +15,6 @@ export class AuthenticationService {
   public userInfos: Subject<Utilisateur> = new Subject<Utilisateur>();
   public userOwnedGroup: Subject<Groupe> = new Subject<Groupe>();
 
-
   constructor(public config: ConfigService, private http: HttpClient) { }
 
   authenticate(email: string, password: string) {
@@ -31,9 +30,15 @@ export class AuthenticationService {
           if (response['description'] === 'Connexion réussie') {
             window.localStorage.setItem('token', response['token']);
             this.isAuthenticated = true;
-            console.log(response['userGroup']);
-            const userDataTest: Utilisateur = <Utilisateur>response['userData'];
-            this.userInfos.next(userDataTest);
+            console.log(response);
+            const userData: Utilisateur = <Utilisateur>response['userData']['idUtilisateur'];
+            const userOwnedGroup: Groupe = new Groupe(  response['userData']['idGroupe'],
+                                                        response['userData']['nom'],
+                                                        response['userData']['dateDeCreation'],
+                                                      );
+
+            this.userInfos.next(userData);
+            this.userOwnedGroup.next(userOwnedGroup);
             resolve(response['description']);
           } else {
             this.destroyAuthentication();

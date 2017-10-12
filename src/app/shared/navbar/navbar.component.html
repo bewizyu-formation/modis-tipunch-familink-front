@@ -16,14 +16,14 @@
     </div>
 
     <button class="menuBtn" [style.border-color]="userInfos.contact.profil.couleur" [matMenuTriggerFor]="menu">
-      <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" alt="gravatar"/>
+      <img src="{{ userInfos.contact.gravatar }}" alt="gravatar"/>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="router.navigate([path_profil])">
+      <button mat-menu-item [routerLink]="path_profil">
         <mat-icon>settings</mat-icon>
         <span>Profil</span>
       </button>
-      <button mat-menu-item (click)="router.navigate([path_groupes])">
+      <button mat-menu-item [routerLink]="path_groupes">
         <mat-icon>swap_horiz</mat-icon>
         <span>Groupes</span>
       </button>
