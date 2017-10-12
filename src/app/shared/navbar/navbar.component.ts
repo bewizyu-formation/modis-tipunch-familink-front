@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { PATH_HOME, PATH_PROFIL, PATH_GROUPES, PATH_LOGIN } from '../../app.routes';
 
 // Services
 import { ConfigService } from '../../services/config.service';
-import { AuthenticationMockService } from '../../services/authentication-mock.service';
+import { AuthenticationService } from '../../services/authentication.service';
+import {  NavigatorService, PATH_HOME, PATH_LOGIN, PATH_PROFIL, PATH_GROUPES} from '../../services/navigator.service';
 
 // Models
 import { Utilisateur } from '../../models/Utilisateur';
@@ -20,19 +19,19 @@ let Sub_userOwnedGroup;
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
-  // PATHS
-  path_home = PATH_HOME;
-  path_profil = PATH_PROFIL;
-  path_groupes = PATH_GROUPES;
-
   // VARS
   userInfos: Utilisateur;
   userOwnedGroup: Groupe;
 
+  path_home = PATH_HOME;
+  path_profil = PATH_PROFIL;
+  path_groupes = PATH_GROUPES;
+
+
   constructor(
     public config: ConfigService,
-    public router: Router,
-    public authService: AuthenticationMockService,
+    public nav: NavigatorService,
+    public authService: AuthenticationService,
   ) { }
 
   ngOnInit(): void {
@@ -58,6 +57,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   logout() {
     this.authService.destroyAuthentication();
-    this.router.navigate([PATH_LOGIN]);
+    this.nav.router.navigate([PATH_LOGIN]);
   }
+
 }
