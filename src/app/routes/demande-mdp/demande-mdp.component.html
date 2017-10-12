@@ -1,0 +1,24 @@
+<div class="demandeMDP-container">
+    <form class="demandeMDP-form" (submit)="demandeMDP()">
+      
+      <div class="demandeMDP-form-row">
+        <div>
+          <label>Email : </label>
+          <mat-form-field>
+            <input matInput placeholder="Saisir email" [formControl]="email" name="email" required />
+            <mat-error *ngIf="email.invalid">{{ getEmailErrorMessage() }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="demandeMDP-form-row">
+        <span class="demandeMDP-form-message">{{ forgotPasswordMessage }}</span>
+      </div>
+      <div class="demandeMDP-form-button">
+        <button *ngIf="!loading && (email.valid )" type="submit" mat-raised-button color="primary">Valider</button>
+        <button *ngIf="!loading && (email.invalid)" type="submit" mat-raised-button color="primary" disabled>Valider</button>
+        <button *ngIf="loading" type="submit" mat-raised-button color="primary" disabled>Vérification en cours ...</button>
+      </div>
+   
+    </form>
+  </div>
+  

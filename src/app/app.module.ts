@@ -28,6 +28,7 @@ import {  MatProgressBarModule,
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { LoginComponent } from './routes/login/login.component';
+import { DemandeMdpComponent } from './routes/demande-mdp/demande-mdp.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { LoginComponent } from './routes/login/login.component';
     AppComponent,
     NavbarComponent,
     LoginComponent,
+    DemandeMdpComponent,
   ],
   imports: [
     BrowserModule,

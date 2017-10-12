@@ -48,7 +48,28 @@ export class AuthenticationService {
     });
   }
 
-  fetchUserInfos(): void {
+  forgotPassword(email: string) {
+    return new Promise((resolve) => {
+
+      const userCredentials = {
+        email: email
+      };
+      this.http.post(`${this.config.API_BASE}${this.config.API_ROUTES.DEMANDEMDP}`, userCredentials).subscribe(
+        (response) => {
+          if (response['description'] === 'Email reconnu') {
+            resolve("Veuillez suivre le lien qui a été envoyé a votre adresse email.");
+          } else {
+            resolve(response['description']);
+          }
+        },
+        (error) => {
+          resolve('Une erreur est survenue.');
+        }
+      );
+    });
+  }
+  
+fetchUserInfos(): void {
 
     /*
     this.http.get(`${this.config.API_BASE}${this.config.API_ROUTES.LOGIN}`).subscribe(
@@ -93,7 +114,7 @@ export class AuthenticationService {
         '10/10/2017 - 00:00'
       )
     );
-  }
+  }  
 
   destroyAuthentication(): void {
     this.isAuthenticated = false;

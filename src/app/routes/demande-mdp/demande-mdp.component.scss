@@ -1,0 +1,41 @@
+.demandeMDP-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .demandeMDP-form {
+    margin-top: 100px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  
+  .demandeMDP-form > * {
+    width: 100%;
+  
+  }
+  
+  .demandeMDP-form-message {
+    height: 10px;
+    width: 220px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: red;
+    display: flex;
+    justify-content: flex-end
+  }
+  
+  .demandeMDP-form-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  .demandeMDP-form-button {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
