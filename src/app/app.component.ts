@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthenticationMockService } from './services/authentication-mock.service';
 
 import {
   Router,
@@ -22,7 +21,7 @@ export class AppComponent implements OnInit, OnDestroy  {
   loadingProgress: number;
 
 
-  constructor(private router: Router, private authService: AuthenticationMockService) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.loading = true;

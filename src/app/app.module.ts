@@ -11,11 +11,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 /* Services */
 import { ConfigService } from './services/config.service';
 import { NavigatorService } from './services/navigator.service';
-import { AuthenticationMockService } from './services/authentication-mock.service';
 import { AuthenticationService } from './services/authentication.service';
 import { ProfilService } from './services/profil.service';
 
 import { HeaderInterceptor } from './interceptors/header.interceptor';
+import { AuthenticationInterceptor } from './interceptors/authentication.interceptor';
 
 
 import {  MatProgressBarModule,
@@ -33,6 +33,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { LoginComponent } from './routes/login/login.component';
 import { DemandeMdpComponent } from './routes/demande-mdp/demande-mdp.component';
 import { CreateUserComponent } from './routes/create-user/create-user.component';
+import { HomeComponent } from './routes/home/home.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { CreateUserComponent } from './routes/create-user/create-user.component'
     LoginComponent,
     DemandeMdpComponent,
     CreateUserComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,10 +64,10 @@ import { CreateUserComponent } from './routes/create-user/create-user.component'
   providers: [
     ConfigService,
     NavigatorService,
-    { provide: AuthenticationMockService, useClass: AuthenticationMockService },
+    ProfilService,
     { provide: AuthenticationService, useClass: AuthenticationService },
     { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
-    ProfilService
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
