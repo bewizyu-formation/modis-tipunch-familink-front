@@ -17,7 +17,6 @@ import { ProfilService } from './services/profil.service';
 import { HeaderInterceptor } from './interceptors/header.interceptor';
 import { AuthenticationInterceptor } from './interceptors/authentication.interceptor';
 
-
 import {  MatProgressBarModule,
           MatIconModule,
           MatToolbarModule,
@@ -25,7 +24,7 @@ import {  MatProgressBarModule,
           MatFormFieldModule,
           MatInputModule,
           MatButtonModule,
-          MatSelectModule
+          MatSelectModule,
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -67,7 +66,7 @@ import { HomeComponent } from './routes/home/home.component';
     ProfilService,
     { provide: AuthenticationService, useClass: AuthenticationService },
     { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
