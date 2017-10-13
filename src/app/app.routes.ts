@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import * as PATHS from './services/navigator.service';
 import { LoginComponent } from './routes/login/login.component';
 import { DemandeMdpComponent } from './routes/demande-mdp/demande-mdp.component';
-import {HomeComponent} from "./routes/home/home.component";
+import { HomeComponent } from './routes/home/home.component';
 
 
 export const ROUTES: Routes = [
