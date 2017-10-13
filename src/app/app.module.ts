@@ -7,11 +7,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
+
 /* Services */
 import { ConfigService } from './services/config.service';
 import { NavigatorService } from './services/navigator.service';
 import { AuthenticationMockService } from './services/authentication-mock.service';
 import { AuthenticationService } from './services/authentication.service';
+import { ProfilService } from './services/profil.service';
 
 import { HeaderInterceptor } from './interceptors/header.interceptor';
 
@@ -23,12 +25,14 @@ import {  MatProgressBarModule,
           MatFormFieldModule,
           MatInputModule,
           MatButtonModule,
+          MatSelectModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { LoginComponent } from './routes/login/login.component';
 import { DemandeMdpComponent } from './routes/demande-mdp/demande-mdp.component';
+import { CreateUserComponent } from './routes/create-user/create-user.component';
 
 
 @NgModule({
@@ -37,6 +41,7 @@ import { DemandeMdpComponent } from './routes/demande-mdp/demande-mdp.component'
     NavbarComponent,
     LoginComponent,
     DemandeMdpComponent,
+    CreateUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,13 +57,15 @@ import { DemandeMdpComponent } from './routes/demande-mdp/demande-mdp.component'
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatSelectModule
   ],
   providers: [
     ConfigService,
     NavigatorService,
     { provide: AuthenticationMockService, useClass: AuthenticationMockService },
     { provide: AuthenticationService, useClass: AuthenticationService },
-    { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
+    ProfilService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PATH_HOME, PATH_PROFIL, PATH_GROUPES, PATH_LOGIN } from '../../app.routes';
+//import { PATH_HOME, PATH_PROFIL, PATH_GROUPES, PATH_LOGIN } from '../../app.routes';
+import { PATH_HOME, PATH_PROFIL, PATH_GROUPES, PATH_LOGIN } from '../../services/navigator.service';
 
 // Services
 import { ConfigService } from '../../services/config.service';
