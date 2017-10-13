@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {PATH_CREATE_ACCOUNT, PATH_LOGIN} from "../../services/navigator.service";
+import { PATH_CREATE_ACCOUNT, PATH_LOGIN } from '../../services/navigator.service';
 
 @Component({
   selector: 'app-home',
