@@ -62,7 +62,7 @@ export class AuthenticationService {
       this.http.post(`${this.config.API_BASE}${this.config.API_ROUTES.DEMANDEMDP}`, userCredentials).subscribe(
         (response) => {
           if (response['description'] === 'Email reconnu') {
-            resolve("Veuillez suivre le lien qui a été envoyé a votre adresse email.");
+            resolve('Veuillez suivre le lien qui a été envoyé a votre adresse email.');
           } else {
             resolve(response['description']);
           }
@@ -73,7 +73,6 @@ export class AuthenticationService {
       );
     });
   }
-  
 fetchUserInfos(): void {
 
     /*
@@ -119,7 +118,7 @@ fetchUserInfos(): void {
         '10/10/2017 - 00:00'
       )
     );
-  }  
+  }
 
   destroyAuthentication(): void {
     this.isAuthenticated = false;

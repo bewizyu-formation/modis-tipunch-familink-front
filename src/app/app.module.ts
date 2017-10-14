@@ -29,6 +29,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { LoginComponent } from './routes/login/login.component';
 import { DemandeMdpComponent } from './routes/demande-mdp/demande-mdp.component';
+import { UpdateMdpComponent } from './routes/update-mdp/update-mdp.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { DemandeMdpComponent } from './routes/demande-mdp/demande-mdp.component'
     NavbarComponent,
     LoginComponent,
     DemandeMdpComponent,
+    UpdateMdpComponent,
   ],
   imports: [
     BrowserModule,
