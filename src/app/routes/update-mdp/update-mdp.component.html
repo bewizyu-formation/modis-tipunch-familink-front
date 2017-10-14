@@ -1,5 +1,5 @@
 <div class="update-mdp-container">
-  <form class="update-mdp-form-form" (submit)="updatePwd()">
+  <form class="update-mdp-form-form" (submit)="updatePassword()">
     <div class="update-mdp-title">Réinitialiser le mot de passe</div>
     <div>
       <div class="update-mdp-form-row">
@@ -21,7 +21,7 @@
         </mat-form-field>
       </div>
       <div class="update-mdp-form-button">
-        <button *ngIf="(password.valid && password.value == newPassword.value )" type="submit" mat-raised-button color="primary">Valider</button>
+        <button *ngIf="(password.valid && password.value === newPassword.value )" type="submit" mat-raised-button color="primary">Valider</button>
         <button *ngIf="(password.invalid)" type="submit" mat-raised-button color="primary" disabled>Valider</button>
       </div>
     </div>

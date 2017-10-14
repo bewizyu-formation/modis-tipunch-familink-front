@@ -73,6 +73,9 @@ export class AuthenticationService {
       );
     });
   }
+
+  updatePassword(  ) {}
+
 fetchUserInfos(): void {
 
     /*
