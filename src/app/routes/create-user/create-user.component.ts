@@ -3,6 +3,8 @@ import { Profil } from '../../models/Profil';
 import { FormControl, Validators } from '@angular/forms';
 import { ProfilService } from '../../services/profil.service';
 import { PASSWORD_VALIDATOR } from '../../validators/password.validator';
+import { AuthenticationService } from '../../services/authentication.service';
+import {  NavigatorService, PATH_FORGOT_PASSWORD,PATH_HOME, } from '../../services/navigator.service';
 
 @Component({
   selector: 'app-create-user',
@@ -12,13 +14,16 @@ import { PASSWORD_VALIDATOR } from '../../validators/password.validator';
 export class CreateUserComponent implements OnInit {
 
 
-    selectedValue: string;
+    selectedValue: number;
+    formCreateUserMessage : string;
+    authenticating = false;
   
     profils : Array<Profil> = [];
 
 
     email = new FormControl('', [Validators.required, Validators.email]);
     password = new FormControl('', [Validators.required, Validators.pattern(PASSWORD_VALIDATOR)]);
+    confirmpassword = new FormControl('', [Validators.required, Validators.pattern(PASSWORD_VALIDATOR)]);
     confirm = new FormControl('', [Validators.required, Validators.pattern(PASSWORD_VALIDATOR)]);
     hide = true;
     nom = new FormControl('', [Validators.required, Validators.minLength(2)]);
@@ -32,35 +37,41 @@ export class CreateUserComponent implements OnInit {
     
   
     constructor(
+      public nav: NavigatorService,
       public profilService: ProfilService,
+      public authService: AuthenticationService,
     ) { }
   
     ngOnInit() {
-      this.profilService.getProfils().subscribe(
+      this.profilService.getProfils()
+      .subscribe(
         (response: Array<Profil>) => {
-          console.log(response);
           this.profils = response;
         },
         error => console.log(error),
-     ); 
-
+      ); 
     }
   
   
     createUser(): void {
-      if (this.email.valid && this.password.valid) {
+      this.formCreateUserMessage ="";
+      if (this.email.valid && this.password.valid && this.confirmpassword.valid && 
+        (this.password.value == this.confirmpassword.value)) {
         
-        /*this.authService.authenticate(this.email.value, this.password.value).then(
+        this.authService.authenticateFormUser(this.email.value, this.password.value, this.confirmpassword.value,
+          this.nom.value, this.prenom.value, this.selectedValue,this.gravatar, this.adresse, this.codePostal,
+          this.ville, this.numTel.value
+        ).then(
           (loginAttempt: string) => {
-          this.authenticationMessage = loginAttempt;
+          this.formCreateUserMessage = loginAttempt;
           this.authenticating = false;
           if (this.authService.isAuthenticated) {
-            this.nav.router.navigate([PATH_HOME]);
+            this.nav.router.navigate([PATH_FORGOT_PASSWORD]);
           }
           }, (error: string) => {
-          this.authenticationMessage = error;
+          this.formCreateUserMessage = error;
           this.authenticating = false;
-        });*/
+        });
   
       }
     }
@@ -75,7 +86,7 @@ export class CreateUserComponent implements OnInit {
     }
   
     getNumTelErrorMessage(){
-      return this.password.hasError('required') ? 'Vous devez saisir votre numéro de téléphone' : '';
+      return this.numTel.hasError('required') ? 'Vous devez saisir votre numéro de téléphone' : '';
     }
 
     getNomErrorMessage() {
@@ -83,16 +94,14 @@ export class CreateUserComponent implements OnInit {
         this.nom.hasError('minlength') ? 'Minimum 2 caractères' : '';
     }
 
-    getStringErrorMessage(){
-      return console.log("erreur numTel");
+    getPrenomErrorMessage(){
+      return this.nom.hasError('required') ? 'Vous devez saisir votre prenom' :
+      this.nom.hasError('minlength') ? 'Minimum 2 caractères' : '';
     }
 
-    navigateToCreateAccount() {
-      //this.nav.router.navigate([PATH_CREATE_ACCOUNT]);
-    }
-  
-    navigateToForgotPassword() {
-      //this.nav.router.navigate([PATH_FORGOT_PASSWORD]);
+    navigateToHome() {
+      this.formCreateUserMessage ="";
+      this.nav.router.navigate([PATH_HOME]);
     }
 
 }

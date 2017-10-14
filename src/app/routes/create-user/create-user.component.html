@@ -22,9 +22,9 @@
         <div>
           <label>Confirm : </label>
           <mat-form-field>
-            <input matInput placeholder="Confirmer le password" [type]="hide ? 'password' : 'text'" [formControl]="password" required>
+            <input matInput placeholder="Confirmer le password" [type]="hide ? 'password' : 'text'" [formControl]="confirmpassword" required>
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-            <mat-error *ngIf="password.invalid">{{ getPasswordErrorMessage() }}</mat-error>
+            <mat-error *ngIf="confirmpassword.invalid">{{ getPasswordErrorMessage() }}</mat-error>
           </mat-form-field>
         </div>
         <div>
@@ -38,13 +38,13 @@
           <label>Prénom : </label>
           <mat-form-field>
             <input matInput placeholder="Saisir le prénom" [formControl]="prenom" name="prenom" required />
-            <mat-error *ngIf="prenom.invalid">{{ getStringErrorMessage() }}</mat-error>
+            <mat-error *ngIf="prenom.invalid">{{ getPrenomErrorMessage() }}</mat-error>
           </mat-form-field>
         </div>
         <div>
           <label>Profil : </label>
           <mat-form-field>
-            <mat-select placeholder="Sélectionner un profil">
+            <mat-select placeholder="Sélectionner un profil" [(ngModel)]="selectedValue" name="profil">
               <mat-option *ngFor="let profil of profils" [value]="profil.idProfil">
                 {{ profil.nom }}
               </mat-option>
@@ -57,25 +57,25 @@
         <div>
           <label>Gravatar : </label>
           <mat-form-field>
-            <input matInput placeholder="Saisir le gravatar" name="gravatar" />
+            <input matInput placeholder="Saisir le gravatar" [(ngModel)]="gravatar" name="gravatar"/>
           </mat-form-field>
         </div>
         <div>
           <label>Adresse : </label>
           <mat-form-field>
-            <input matInput placeholder="Saisir l'adresse" name="adresse" />
+            <input matInput placeholder="Saisir l'adresse" [(ngModel)]="adresse" name="adresse"/>
           </mat-form-field>
         </div>
         <div>
           <label>Code postal : </label>
           <mat-form-field>
-            <input matInput placeholder="Saisir le code postal" name="codePostal" />
+            <input matInput placeholder="Saisir le code postal" [(ngModel)]="codePostal" name="codePostal" />
           </mat-form-field>
         </div>
         <div>
           <label>Ville : </label>
           <mat-form-field>
-            <input matInput placeholder="Saisir la ville" name="ville" />
+            <input matInput placeholder="Saisir la ville" [(ngModel)]="ville" name="ville" />
           </mat-form-field>
         </div>
         <div>
@@ -89,7 +89,7 @@
     </div>
 
     <div class="createUser-form-row">
-      <span class="createUser-form-message">{{ forgotPasswordMessage }}</span>
+      <span class="createUser-form-message">{{ formCreateUserMessage }}</span>
     </div>
 
     <div class="createUser-form-row">
@@ -99,8 +99,8 @@
         <button *ngIf="loading" type="submit" mat-raised-button color="primary" disabled>Vérification en cours ...</button>
       </div>
       <div class="createUser-form-button">
-        <button *ngIf="!loading && (numTel.valid )" type="submit" mat-raised-button color="primary">Annuler</button>
-        <button *ngIf="!loading && (numTel.invalid)" type="submit" mat-raised-button color="primary" disabled>Annuler</button>
+        <button *ngIf="!loading && (numTel.valid )" type="reset" mat-raised-button color="primary">Annuler</button>
+        <button *ngIf="!loading && (numTel.invalid)" type="reset" mat-raised-button color="primary" disabled>Annuler</button>
       </div>
     </div>
   </form>

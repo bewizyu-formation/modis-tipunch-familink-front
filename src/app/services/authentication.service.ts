@@ -73,6 +73,41 @@ export class AuthenticationService {
       );
     });
   }
+
+  authenticateFormUser(email: string, password: string, confirmpassword:string,
+                       nom: string, prenom: string, idProfil: number,
+                       gravatar: string, adresse: string, codePostal: string,
+                       ville: string, numTel: string 
+                      ) {
+    return new Promise((resolve) => {
+
+      const userCredentials = {
+        email : email,
+        password : password,
+        confirmpassword : confirmpassword,
+        nom : nom,
+        prenom : prenom,
+        idProfil : idProfil,
+        gravatar : gravatar,
+        adresse : adresse,
+        codePostal : codePostal,
+        ville : ville,
+        numTel :numTel
+      };
+      this.http.post(`${this.config.API_BASE}${this.config.API_ROUTES.CREATEACCOUNT}`, userCredentials).subscribe(
+        (response) => {
+          if (response['description'] === 'Utilisateur créé') {
+            resolve("Votre compte a été créé");
+          } else {
+            resolve(response['description']);
+          }
+        },
+        (error) => {
+          resolve('Une erreur est survenue.');
+        }
+      );
+    });
+  }
   
 fetchUserInfos(): void {
 
@@ -106,7 +141,9 @@ fetchUserInfos(): void {
             1,
             'SENIOR',
             '#FFFF00',
-          ))
+          ),
+          '0120304050',
+        )
       )
     );
   }
