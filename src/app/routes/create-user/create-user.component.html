@@ -1,54 +1,55 @@
 <div class="createUser-container">
   <form class="createUser-form" (submit)="createUser()">
 
-    <p class="titre">Créer un utilisateur</p>
+    <h1 class="titre">Créer un Compte</h1>
     <div class="createUser-form-row">
       <div class="createUser-form-col">
         <div>
           <label>Email : </label>
           <mat-form-field>
-            <input matInput placeholder="Saisir email" [formControl]="email" name="email" required />
-            <mat-error *ngIf="email.invalid">{{ getEmailErrorMessage() }}</mat-error>
+            <input matInput placeholder="Saisir email" [formControl]="requieredFormsGroup.get('email')" name="email" required />
+            <mat-error *ngIf="requieredFormsGroup.get('email').invalid">{{ getEmailErrorMessage() }}</mat-error>
           </mat-form-field>
         </div>
         <div>
           <label>Password : </label>
           <mat-form-field>
-            <input matInput placeholder="Saisir password" [type]="hide ? 'password' : 'text'" [formControl]="password" required>
+            <input matInput placeholder="Saisir password" [type]="hide ? 'password' : 'text'" [formControl]="passwordGroup.get('password')" required>
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-            <mat-error *ngIf="password.invalid">{{ getPasswordErrorMessage() }}</mat-error>
+            <mat-error *ngIf="passwordGroup.get('password').invalid">{{ getPasswordErrorMessage() }}</mat-error>
           </mat-form-field>
         </div>
         <div>
           <label>Confirm : </label>
           <mat-form-field>
-            <input matInput placeholder="Confirmer le password" [type]="hide ? 'password' : 'text'" [formControl]="confirmpassword" required>
+            <input matInput placeholder="Confirmer le password" [type]="hide ? 'password' : 'text'" [formControl]="passwordGroup.get('passwordConfirm')" required>
             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-            <mat-error *ngIf="confirmpassword.invalid">{{ getPasswordErrorMessage() }}</mat-error>
+            <mat-error *ngIf="passwordGroup.get('passwordConfirm').invalid">{{ getPasswordConfirmErrorMessage() }}</mat-error>
           </mat-form-field>
         </div>
         <div>
           <label>Nom : </label>
           <mat-form-field>
-            <input matInput placeholder="Saisir le nom" [formControl]="nom" name="nom" required />
-            <mat-error *ngIf="nom.invalid">{{ getNomErrorMessage() }}</mat-error>
+            <input matInput placeholder="Saisir le nom" [formControl]="requieredFormsGroup.get('nom')" name="nom" required />
+            <mat-error *ngIf="requieredFormsGroup.get('nom').invalid">{{ getNomErrorMessage() }}</mat-error>
           </mat-form-field>
         </div>
         <div>
           <label>Prénom : </label>
           <mat-form-field>
-            <input matInput placeholder="Saisir le prénom" [formControl]="prenom" name="prenom" required />
-            <mat-error *ngIf="prenom.invalid">{{ getPrenomErrorMessage() }}</mat-error>
+            <input matInput placeholder="Saisir le prénom" [formControl]="requieredFormsGroup.get('prenom')" name="prenom" required />
+            <mat-error *ngIf="requieredFormsGroup.get('prenom').invalid">{{ getPrenomErrorMessage() }}</mat-error>
           </mat-form-field>
         </div>
         <div>
           <label>Profil : </label>
           <mat-form-field>
-            <mat-select placeholder="Sélectionner un profil" [(ngModel)]="selectedValue" name="profil">
+            <mat-select placeholder="Sélectionner un profil" [formControl]="requieredFormsGroup.get('profil')" name="profil" required>
               <mat-option *ngFor="let profil of profils" [value]="profil.idProfil">
                 {{ profil.nom }}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="requieredFormsGroup.get('profil').invalid">{{ getProfilErrorMessage() }}</mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -57,7 +58,8 @@
         <div>
           <label>Gravatar : </label>
           <mat-form-field>
-            <input matInput placeholder="Saisir le gravatar" [(ngModel)]="gravatar" name="gravatar"/>
+            <input matInput placeholder="Saisir le gravatar" [formControl]="gravatar" name="gravatar" />
+            <mat-error *ngIf="gravatar.invalid">{{ getGravatarErrorMessage() }}</mat-error>
           </mat-form-field>
         </div>
         <div>
@@ -69,7 +71,8 @@
         <div>
           <label>Code postal : </label>
           <mat-form-field>
-            <input matInput placeholder="Saisir le code postal" [(ngModel)]="codePostal" name="codePostal" />
+            <input matInput placeholder="Saisir le code postal" [formControl]="codePostal" name="codePostal" />
+            <mat-error *ngIf="codePostal.invalid">{{ getCodePostalErrorMessage() }}</mat-error>
           </mat-form-field>
         </div>
         <div>
@@ -81,26 +84,23 @@
         <div>
           <label>Téléphone : </label>
           <mat-form-field>
-            <input matInput placeholder="Saisir le téléphone" [formControl]="numTel" name="numTel" required />
-            <mat-error *ngIf="numTel.invalid">{{ getNumTelErrorMessage() }}</mat-error>
+            <input matInput placeholder="Saisir le téléphone" [formControl]="requieredFormsGroup.get('numTel')" name="numTel" required />
+            <mat-error *ngIf="requieredFormsGroup.get('numTel').invalid">{{ getNumTelErrorMessage() }}</mat-error>
           </mat-form-field>
+        </div>
+        <div>
+          <span class="createUser-form-message">{{ formCreateUserMessage }}</span>
         </div>
       </div>
     </div>
-
-    <div class="createUser-form-row">
-      <span class="createUser-form-message">{{ formCreateUserMessage }}</span>
-    </div>
-
     <div class="createUser-form-row">
       <div class="createUser-form-button">
-        <button *ngIf="!loading && (numTel.valid )" type="submit" mat-raised-button color="primary">Valider</button>
-        <button *ngIf="!loading && (numTel.invalid)" type="submit" mat-raised-button color="primary" disabled>Valider</button>
-        <button *ngIf="loading" type="submit" mat-raised-button color="primary" disabled>Vérification en cours ...</button>
+        <button *ngIf="!isProcessing && isFormValid()" type="submit" mat-raised-button color="primary">Valider</button>
+        <button *ngIf="!isProcessing && !isFormValid()" type="submit" mat-raised-button color="primary" disabled>Valider</button>
+        <button *ngIf="isProcessing" type="submit" mat-raised-button color="primary" disabled>Création du compte  ...</button>
       </div>
       <div class="createUser-form-button">
-        <button *ngIf="!loading && (numTel.valid )" type="reset" mat-raised-button color="primary">Annuler</button>
-        <button *ngIf="!loading && (numTel.invalid)" type="reset" mat-raised-button color="primary" disabled>Annuler</button>
+        <button mat-raised-button (click)="navigateToHome()">Annuler</button>
       </div>
     </div>
   </form>

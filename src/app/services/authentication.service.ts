@@ -62,7 +62,7 @@ export class AuthenticationService {
       this.http.post(`${this.config.API_BASE}${this.config.API_ROUTES.DEMANDEMDP}`, userCredentials).subscribe(
         (response) => {
           if (response['description'] === 'Email reconnu') {
-            resolve("Veuillez suivre le lien qui a été envoyé a votre adresse email.");
+            resolve('Veuillez suivre le lien qui a été envoyé a votre adresse email.');
           } else {
             resolve(response['description']);
           }
@@ -74,30 +74,12 @@ export class AuthenticationService {
     });
   }
 
-  authenticateFormUser(email: string, password: string, confirmpassword:string,
-                       nom: string, prenom: string, idProfil: number,
-                       gravatar: string, adresse: string, codePostal: string,
-                       ville: string, numTel: string 
-                      ) {
+  createUser(userCredentials: Object) {
     return new Promise((resolve) => {
-
-      const userCredentials = {
-        email : email,
-        password : password,
-        confirmpassword : confirmpassword,
-        nom : nom,
-        prenom : prenom,
-        idProfil : idProfil,
-        gravatar : gravatar,
-        adresse : adresse,
-        codePostal : codePostal,
-        ville : ville,
-        numTel :numTel
-      };
       this.http.post(`${this.config.API_BASE}${this.config.API_ROUTES.CREATEACCOUNT}`, userCredentials).subscribe(
         (response) => {
           if (response['description'] === 'Utilisateur créé') {
-            resolve("Votre compte a été créé");
+            resolve('Votre compte a été créé.');
           } else {
             resolve(response['description']);
           }
@@ -108,7 +90,7 @@ export class AuthenticationService {
       );
     });
   }
-  
+
 fetchUserInfos(): void {
 
     /*
@@ -133,6 +115,7 @@ fetchUserInfos(): void {
           'Nom',
           'Prénom',
           'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
+          '0120304050',
           '93 Rue du progrès',
           '69000',
           'LYON',
@@ -142,7 +125,6 @@ fetchUserInfos(): void {
             'SENIOR',
             '#FFFF00',
           ),
-          '0120304050',
         )
       )
     );
@@ -156,7 +138,7 @@ fetchUserInfos(): void {
         '10/10/2017 - 00:00'
       )
     );
-  }  
+  }
 
   destroyAuthentication(): void {
     this.isAuthenticated = false;
