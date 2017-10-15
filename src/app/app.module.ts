@@ -33,6 +33,7 @@ import { LoginComponent } from './routes/login/login.component';
 import { DemandeMdpComponent } from './routes/demande-mdp/demande-mdp.component';
 import { CreateUserComponent } from './routes/create-user/create-user.component';
 import { HomeComponent } from './routes/home/home.component';
+import { CreateContactComponent } from './routes/create-contact/create-contact.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { HomeComponent } from './routes/home/home.component';
     DemandeMdpComponent,
     CreateUserComponent,
     HomeComponent,
+    CreateContactComponent,
   ],
   imports: [
     BrowserModule,

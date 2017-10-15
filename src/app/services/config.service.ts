@@ -8,8 +8,9 @@ export class ConfigService {
   public API_ROUTES = {
     LOGIN: 'login',
     DEMANDEMDP :'forgot-password',
-    PROFILS :'profils/GET',
-    CREATEACCOUNT:'utilisateurs/POST'
+    PROFILS :'profils',
+    CREATEACCOUNT :'utilisateurs',
+    CREATECONTACT :'contacts',
   };
 
   constructor() { }

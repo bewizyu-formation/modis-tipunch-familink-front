@@ -44,8 +44,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     // fetch users datas if the user is authenticated
     if (this.authService.isAuthenticated) {
-      this.authService.fetchUserInfos();
-      this.authService.fetchUserOwnedGroup();
+     /* this.authService.fetchUserInfos();
+      this.authService.fetchUserOwnedGroup();*/
     }
 
   }

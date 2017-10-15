@@ -1,0 +1,91 @@
+<div class="createContact-container">
+  <form class="createContact-form" (submit)="createContact()">
+
+    <p class="titre">Créer un contact</p>
+    <div class="createContact-form-row">
+      <div class="createContact-form-col">
+        <div>
+          <label>Email : </label>
+          <mat-form-field>
+            <input matInput placeholder="Saisir email" [formControl]="email" name="email" required />
+            <mat-error *ngIf="email.invalid">{{ getEmailErrorMessage() }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <label>Nom : </label>
+          <mat-form-field>
+            <input matInput placeholder="Saisir le nom" [formControl]="nom" name="nom" required />
+            <mat-error *ngIf="nom.invalid">{{ getNomErrorMessage() }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <label>Prénom : </label>
+          <mat-form-field>
+            <input matInput placeholder="Saisir le prénom" [formControl]="prenom" name="prenom" required />
+            <mat-error *ngIf="prenom.invalid">{{ getPrenomErrorMessage() }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <label>Profil : </label>
+          <mat-form-field>
+            <mat-select placeholder="Sélectionner un profil" [(ngModel)]="selectedValue" name="profil">
+              <mat-option *ngFor="let profil of profils" [value]="profil.idProfil">
+                {{ profil.nom }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="createContact-form-col">
+        <div>
+          <label>Gravatar : </label>
+          <mat-form-field>
+            <input matInput placeholder="Saisir le gravatar" [(ngModel)]="gravatar" name="gravatar"/>
+          </mat-form-field>
+        </div>
+        <div>
+          <label>Adresse : </label>
+          <mat-form-field>
+            <input matInput placeholder="Saisir l'adresse" [(ngModel)]="adresse" name="adresse"/>
+          </mat-form-field>
+        </div>
+        <div>
+          <label>Code postal : </label>
+          <mat-form-field>
+            <input matInput placeholder="Saisir le code postal" [(ngModel)]="codePostal" name="codePostal" />
+          </mat-form-field>
+        </div>
+        <div>
+          <label>Ville : </label>
+          <mat-form-field>
+            <input matInput placeholder="Saisir la ville" [(ngModel)]="ville" name="ville" />
+          </mat-form-field>
+        </div>
+        <div>
+          <label>Téléphone : </label>
+          <mat-form-field>
+            <input matInput placeholder="Saisir le téléphone" [formControl]="numTel" name="numTel" required />
+            <mat-error *ngIf="numTel.invalid">{{ getNumTelErrorMessage() }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="createContact-form-row">
+      <span class="createContact-form-message">{{ formcreateContactMessage }}</span>
+    </div>
+
+    <div class="createContact-form-row">
+      <div class="createContact-form-button">
+        <button *ngIf="!loading && (numTel.valid )" type="submit" mat-raised-button color="primary">Valider</button>
+        <button *ngIf="!loading && (numTel.invalid)" type="submit" mat-raised-button color="primary" disabled>Valider</button>
+        <button *ngIf="loading" type="submit" mat-raised-button color="primary" disabled>Vérification en cours ...</button>
+      </div>
+      <div class="createContact-form-button">
+        <button *ngIf="!loading && (numTel.valid )" type="reset" mat-raised-button color="primary">Annuler</button>
+        <button *ngIf="!loading && (numTel.invalid)" type="reset" mat-raised-button color="primary" disabled>Annuler</button>
+      </div>
+    </div>
+  </form>
+</div>
