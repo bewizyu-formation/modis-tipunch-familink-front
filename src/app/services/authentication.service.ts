@@ -62,7 +62,7 @@ export class AuthenticationService {
       this.http.post(`${this.config.API_BASE}${this.config.API_ROUTES.DEMANDEMDP}`, userCredentials).subscribe(
         (response) => {
           if (response['description'] === 'Email reconnu') {
-            resolve("Veuillez suivre le lien qui a été envoyé a votre adresse email.");
+            resolve('Veuillez suivre le lien qui a été envoyé a votre adresse email.');
           } else {
             resolve(response['description']);
           }
@@ -73,7 +73,24 @@ export class AuthenticationService {
       );
     });
   }
-  
+
+  createUser(userCredentials: Object) {
+    return new Promise((resolve) => {
+      this.http.post(`${this.config.API_BASE}${this.config.API_ROUTES.CREATEACCOUNT}`, userCredentials).subscribe(
+        (response) => {
+          if (response['description'] === 'Utilisateur créé') {
+            resolve('Votre compte a été créé.');
+          } else {
+            resolve(response['description']);
+          }
+        },
+        (error) => {
+          resolve('Une erreur est survenue.');
+        }
+      );
+    });
+  }
+
 fetchUserInfos(): void {
 
     /*
@@ -98,6 +115,7 @@ fetchUserInfos(): void {
           'Nom',
           'Prénom',
           'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
+          '0120304050',
           '93 Rue du progrès',
           '69000',
           'LYON',
@@ -106,7 +124,8 @@ fetchUserInfos(): void {
             1,
             'SENIOR',
             '#FFFF00',
-          ))
+          ),
+        )
       )
     );
   }
@@ -119,7 +138,7 @@ fetchUserInfos(): void {
         '10/10/2017 - 00:00'
       )
     );
-  }  
+  }
 
   destroyAuthentication(): void {
     this.isAuthenticated = false;

@@ -6,6 +6,7 @@ export class Contact {
     public nom: string,
     public prenom: string,
     public gravatar: string,
+    public numTel: string,
     public adresse: string,
     public codePostal: string,
     public ville: string,
