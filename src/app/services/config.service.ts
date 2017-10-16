@@ -13,7 +13,7 @@ export class ConfigService {
     UTILISATEURS: 'utilisateurs/',
     UTILISATEURSGROUPE: '/groupe',
     PROFILS: 'profils/',
-    CREATECONTACT: 'contacts',
+    CONTACTS: 'contacts/',
   };
 
   constructor() { }

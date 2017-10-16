@@ -12,6 +12,5 @@ export class Contact {
     public ville: string,
     public email: string,
     public profil: Profil,
-    public numTel:string,
   ) {}
 }

@@ -112,7 +112,7 @@ export class AuthenticationService {
         ville: ville,
         numTel: numTel
       };
-      this.http.post(`${this.config.API_BASE}${this.config.API_ROUTES.CREATECONTACT}`, userCredentials).subscribe(
+      this.http.post(`${this.config.API_BASE}${this.config.API_ROUTES.CONTACTS}`, userCredentials).subscribe(
         (response) => {
           if (response['description'] === 'Contact créé') {
             resolve('Votre contact a été créé');
