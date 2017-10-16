@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { Md5 } from 'ts-md5/dist/md5';
 
 // Services
 import { ConfigService } from '../../services/config.service';
@@ -36,12 +37,12 @@ export class LoginComponent implements OnInit {
   login(): void {
     if (this.email.valid && this.password.valid) {
       this.authenticating = true;
-      this.authService.authenticate(this.email.value, this.password.value).then(
+      this.authService.authenticate(this.email.value, Md5.hashStr(this.password.value).toString()).then(
         (loginAttempt: string) => {
         this.authenticationMessage = loginAttempt;
         this.authenticating = false;
         if (this.authService.isAuthenticated) {
-          this.nav.router.navigate([PATH_HOME]);
+          this.nav.router.navigate([PATH_CREATE_ACCOUNT]);
         }
         }, (error: string) => {
         this.authenticationMessage = error;

@@ -29,17 +29,21 @@ export class AuthenticationService {
         (response) => {
           if (response['description'] === 'Connexion réussie') {
             window.localStorage.setItem('token', response['token']);
-            this.isAuthenticated = true;
-            console.log(response);
-            const userData: Utilisateur = <Utilisateur>response['userData']['idUtilisateur'];
-            const userOwnedGroup: Groupe = new Groupe(  response['userData']['idGroupe'],
-                                                        response['userData']['nom'],
-                                                        response['userData']['dateDeCreation'],
-                                                      );
+            this.fetchUserInfos().then(userInfos => {
+              this.userInfos.next(userInfos);
+              this.fetchUserOwnedGroup().then(userOwnedGroup => {
+                this.userOwnedGroup.next(userOwnedGroup);
+                setTimeout(() => {
+                  this.isAuthenticated = true;
+                  resolve(response['description']);
+                }, 500);
+              }, error => {
+                resolve('Une erreur est survenue');
+              });
+            }, error => {
+              resolve('Une erreur est survenue');
+            });
 
-            this.userInfos.next(userData);
-            this.userOwnedGroup.next(userOwnedGroup);
-            resolve(response['description']);
           } else {
             this.destroyAuthentication();
             resolve(response['description']);
@@ -74,59 +78,113 @@ export class AuthenticationService {
     });
   }
 
-  updatePassword(  ) {}
-
-fetchUserInfos(): void {
-
-    /*
-    this.http.get(`${this.config.API_BASE}${this.config.API_ROUTES.LOGIN}`).subscribe(
-      (response) => {
-
-      },
-      (error) => {
-
-      }
-    );
-    */
-
-
-    this.userInfos.next(
-      new Utilisateur(
-        1,
-        'email@domain.com',
-        'MD5PASSWORD',
-        new Contact(
-          1,
-          'Nom',
-          'Prénom',
-          'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50',
-          '93 Rue du progrès',
-          '69000',
-          'LYON',
-          'email@domain.com',
-          new Profil(
-            1,
-            'SENIOR',
-            '#FFFF00',
-          ))
-      )
-    );
+  createUser(userCredentials: Object) {
+    return new Promise((resolve) => {
+      this.http.post(`${this.config.API_BASE}${this.config.API_ROUTES.UTILISATEURS}`, userCredentials).subscribe(
+        (response) => {
+          if (response['description'] === 'Utilisateur créé') {
+            resolve('Votre compte a été créé.');
+          } else {
+            resolve(response['description']);
+          }
+        },
+        (error) => {
+          resolve('Une erreur est survenue.');
+        }
+      );
+    });
   }
 
-  fetchUserOwnedGroup(): void {
-    this.userOwnedGroup.next(
-      new Groupe(
-        1,
-        'Nom du groupe',
-        '10/10/2017 - 00:00'
-      )
-    );
+
+  getUserIdFromToken(token: string): number {
+    const decodedToken = atob(token);
+    const separatorIndex = decodedToken.indexOf('-');
+    if (!separatorIndex) { throw new Error('Token separator not found'); }
+    try {
+      return parseInt(decodedToken.slice(0, separatorIndex), 10);
+    } catch (e) {
+      throw new Error('Cannot parse user id from token');
+    }
+  }
+
+
+  fetchUserInfos(): Promise<Utilisateur> {
+    return new Promise((resolve) => {
+      if (window.localStorage.getItem('token')) {
+        const userId = this.getUserIdFromToken(window.localStorage.getItem('token'));
+        this.http.get(`${this.config.API_BASE}${this.config.API_ROUTES.UTILISATEURS}${userId}`).subscribe(
+          (response) => {
+            resolve(
+              new Utilisateur(
+                response['idUtilisateur'],
+                response['email'],
+                response['motDePasse'],
+                new Contact(
+                  response['contact']['idContact'],
+                  response['contact']['nom'],
+                  response['contact']['prenom'],
+                  response['contact']['gravatar'],
+                  response['contact']['numTel'],
+                  response['contact']['adresse'],
+                  response['contact']['codePostal'],
+                  response['contact']['ville'],
+                  response['contact']['email'],
+                  new Profil(
+                    response['contact']['profil']['idProfil'],
+                    response['contact']['profil']['nom'],
+                    response['contact']['profil']['couleur'],
+                  ))
+              )
+            );
+          },
+          (error) => {
+            this.destroyAuthentication();
+          }
+        );
+
+      }
+
+    });
+  }
+
+  fetchUserOwnedGroup(): Promise<Groupe> {
+    return new Promise((resolve) => {
+      if (window.localStorage.getItem('token')) {
+        const userId = this.getUserIdFromToken(window.localStorage.getItem('token'));
+
+
+        this.http.get(`${this.config.API_BASE}${this.config.API_ROUTES.UTILISATEURS}${userId}`
+          + `${this.config.API_ROUTES.UTILISATEURSGROUPE}`).subscribe(
+          (response) => {
+            if (response['userOwnedGroup'] !== '') {
+              resolve(
+                new Groupe(
+                  response['userOwnedGroup']['idGroupe'],
+                  response['userOwnedGroup']['nom'],
+                  response['userOwnedGroup']['dateDeCreation'],
+                )
+              );
+            } else {
+              resolve(
+                new Groupe(
+                  0,
+                  'Aucun groupe',
+                  '',
+                )
+              );
+            }
+          },
+          (error) => {
+            this.destroyAuthentication();
+          }
+        );
+
+      }
+    });
   }
 
   destroyAuthentication(): void {
     this.isAuthenticated = false;
-    this.userInfos = new Subject<Utilisateur>();
-    this.userOwnedGroup = new Subject<Groupe>();
     window.localStorage.removeItem('token');
   }
 
