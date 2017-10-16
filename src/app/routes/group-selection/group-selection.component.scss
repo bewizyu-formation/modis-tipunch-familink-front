@@ -1,0 +1,47 @@
+.header__image {
+  display: block;
+  margin: auto 0;
+ align-items: center;
+  background-image: url("../../../assets/groups.jpg");
+  background-repeat: no-repeat;
+  background-position: top center;
+border-radius: 20px;
+
+  height: 300px;
+}
+.group__container{
+  display: flex;
+  width: 100%;
+  height: 200px;
+  margin-top: 30px;
+  flex-flow: column;
+
+}
+.group__createGroup{
+  display: flex;
+  margin: auto 0;
+  justify-content: center;
+}
+.group_text{
+  text-align: center;
+}
+.group_button{
+  margin: 10px;
+  border: 1px solid black;
+  border-radius: 2px;
+}
+.group_input{
+  border: 1px solid black;
+  border-radius: 2px;
+  margin: 10px;
+ text-align: center;
+  width: 300px;
+}
+
+///////Labels//////
+.group_label{
+  font-weight: bold;
+}
+.Groups_label{
+  font-weight: bold;
+}

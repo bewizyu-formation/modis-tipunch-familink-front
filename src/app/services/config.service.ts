@@ -11,7 +11,8 @@ export class ConfigService {
     LOGIN: 'login',
     DEMANDEMDP : 'forgot-password',
     PROFILS : 'profils/',
-    CREATEACCOUNT: 'utilisateurs/'
+    CREATEACCOUNT: 'utilisateurs/',
+    GROUPSELECTION: 'group-selection'
   };
 
   constructor() { }

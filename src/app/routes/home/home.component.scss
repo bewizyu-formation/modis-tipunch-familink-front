@@ -43,11 +43,23 @@ margin-left: 20px;
   border-radius: 10px;
   margin-bottom: 50px;
 }
-
-.body__container__col{
-text-align: center;
-  font-size: 1.2em;
+.body__image:hover{
+  opacity: 0.8;
 }
+
+.body__container{
+  display: flex;
+}
+
+.body__container__text{
+  width: 90%;
+  text-align: center;
+  font-size: 1.3em;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
 .body__container{
   margin-bottom: 300px;
 }

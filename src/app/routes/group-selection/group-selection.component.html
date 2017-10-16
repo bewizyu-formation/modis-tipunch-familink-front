@@ -1,0 +1,27 @@
+<div class="header__image"></div>
+
+<div class="group__container">
+  <label class="group_label">Mon Groupe : </label>
+
+  <div class="create-group">
+    <p class="group_text">Vous n'avez pas de groupes, remplissez le champ ci-dessous pour en ajouter un : </p>
+    <div class="group__createGroup">
+    <input class="group_input" matInput placeholder="Entrer le Nom du Groupe" [formControl]="nomGroup" name="nom_groupe" required />
+    <mat-error *ngIf="nomGroup.invalid">{{ getGroupeEmptyErrorMessage() }}</mat-error>
+    <button class="group_button" color="primary" mat-raised-button>Créer Groupe</button>
+  </div>
+  </div>
+</div>
+
+
+
+<div class="Groups__container">
+  <label class="Groups_label">Mes autres Groupes : </label>
+  <mat-nav-list #groups>
+    <mat-list-item *ngFor="let group of Groups2">
+      <app-group-item>{{group}}</app-group-item>
+    </mat-list-item>
+  </mat-nav-list>
+</div>
+
+
