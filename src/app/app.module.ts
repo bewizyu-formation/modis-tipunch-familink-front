@@ -33,6 +33,7 @@ import { LoginComponent } from './routes/login/login.component';
 import { DemandeMdpComponent } from './routes/demande-mdp/demande-mdp.component';
 import { CreateUserComponent } from './routes/create-user/create-user.component';
 import { HomeComponent } from './routes/home/home.component';
+import { FooterComponent } from './shared/footer/footer.component';
 import { GroupSelectionComponent } from './routes/group-selection/group-selection.component';
 import { GroupItemComponent } from './routes/group-selection/group-item/group-item.component';
 
@@ -45,6 +46,7 @@ import { GroupItemComponent } from './routes/group-selection/group-item/group-it
     DemandeMdpComponent,
     CreateUserComponent,
     HomeComponent,
+    FooterComponent,
     GroupSelectionComponent,
     GroupItemComponent,
   ],
