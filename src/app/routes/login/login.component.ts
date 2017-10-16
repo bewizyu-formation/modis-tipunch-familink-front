@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         this.authenticationMessage = loginAttempt;
         this.authenticating = false;
         if (this.authService.isAuthenticated) {
-          this.nav.router.navigate([PATH_HOME]);
+          this.nav.router.navigate([PATH_CREATE_ACCOUNT]);
         }
         }, (error: string) => {
         this.authenticationMessage = error;

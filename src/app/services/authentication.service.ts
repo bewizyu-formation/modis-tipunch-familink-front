@@ -78,6 +78,23 @@ export class AuthenticationService {
     });
   }
 
+  createUser(userCredentials: Object) {
+    return new Promise((resolve) => {
+      this.http.post(`${this.config.API_BASE}${this.config.API_ROUTES.CREATEACCOUNT}`, userCredentials).subscribe(
+        (response) => {
+          if (response['description'] === 'Utilisateur créé') {
+            resolve('Votre compte a été créé.');
+          } else {
+            resolve(response['description']);
+          }
+        },
+        (error) => {
+          resolve('Une erreur est survenue.');
+        }
+      );
+    });
+  }
+
 
   getUserIdFromToken(token: string): number {
     const decodedToken = atob(token);
@@ -126,6 +143,7 @@ export class AuthenticationService {
         );
 
       }
+
     });
   }
 
