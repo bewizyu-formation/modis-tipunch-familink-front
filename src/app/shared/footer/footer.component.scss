@@ -1,0 +1,44 @@
+.footerGroupImg {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.footer {
+  display: flex;
+  color: white;
+  background-color: #3F51B5;
+  height: 60px;
+  margin-bottom: 50px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 15px;
+  .brand {
+    .logo {
+      height: 60px;
+      display: flex;
+      align-items: center;
+
+      .logoImg {
+        height: 70%;
+        padding-right: 5px;
+      }
+      .logoLink {
+        font-size: 28px;
+        color: #FFFFFF;
+      }
+
+    }
+
+
+  }
+
+  .social {
+    display: flex;
+    justify-content: space-around;
+    width: 200px;
+  }
+
+
+}
