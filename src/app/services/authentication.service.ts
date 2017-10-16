@@ -122,7 +122,6 @@ export class AuthenticationService {
           },
           (error) => {
             this.destroyAuthentication();
-            console.log(error);
           }
         );
 
@@ -134,40 +133,37 @@ export class AuthenticationService {
     return new Promise((resolve) => {
       if (window.localStorage.getItem('token')) {
         const userId = this.getUserIdFromToken(window.localStorage.getItem('token'));
-        this.http.get(`${this.config.API_BASE}${this.config.API_ROUTES.UTILISATEURS}${userId}
-           ${this.config.API_ROUTES.UTILISATEURSGROUPE}`).subscribe(
+
+
+        this.http.get(`${this.config.API_BASE}${this.config.API_ROUTES.UTILISATEURS}${userId}`
+          + `${this.config.API_ROUTES.UTILISATEURSGROUPE}`).subscribe(
           (response) => {
-            console.log(response);
-            resolve(
-              new Groupe(
-                1,
-                'Nom du groupe',
-                '10/10/2017 - 00:00'
-              )
-            );
+            if (response['userOwnedGroup'] !== '') {
+              resolve(
+                new Groupe(
+                  response['userOwnedGroup']['idGroupe'],
+                  response['userOwnedGroup']['nom'],
+                  response['userOwnedGroup']['dateDeCreation'],
+                )
+              );
+            } else {
+              resolve(
+                new Groupe(
+                  0,
+                  'Aucun groupe',
+                  '',
+                )
+              );
+            }
           },
           (error) => {
             this.destroyAuthentication();
-            console.log(error);
           }
         );
 
       }
     });
   }
-
-  /*
-  fetchUserOwnedGroup(): void {
-    // TODO: remplacer les données mock par les donnnées d'une requete http vers l'api groupes
-    this.userOwnedGroup.next(
-      new Groupe(
-        1,
-        'Nom du groupe',
-        '10/10/2017 - 00:00'
-      )
-    );
-  }
-  */
 
   destroyAuthentication(): void {
     this.isAuthenticated = false;
