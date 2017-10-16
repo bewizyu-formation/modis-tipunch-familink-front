@@ -1,1 +1,30 @@
-footer works
+
+
+<div class="footerGroupImg">
+  <img src="../assets/groupe.png" alt="groupe"/>
+</div>
+<div class="footer">
+  <div class="brand">
+    <div class="logo">
+      <img class="logoImg" src="../../../assets/logo.png" alt="gravatar"/>
+      <a class="logoLink" [routerLink]="path_home">{{config.appName}}</a>
+    </div>
+  </div>
+
+  <div class="social">
+    <button mat-mini-fab >
+      <mat-icon aria-label="Example icon-button with a heart icon">info_outline</mat-icon>
+    </button>
+    <button mat-mini-fab color="accent">
+      <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+    </button>
+    <button mat-mini-fab color="warn">
+      <mat-icon aria-label="Example icon-button with a heart icon">rss_feed</mat-icon>
+    </button>
+    <button mat-mini-fab>
+      <mat-icon aria-label="Example icon-button with a heart icon">live_help</mat-icon>
+    </button>
+
+  </div>
+</div>
+
