@@ -34,6 +34,7 @@ import { DemandeMdpComponent } from './routes/demande-mdp/demande-mdp.component'
 import { CreateUserComponent } from './routes/create-user/create-user.component';
 import { HomeComponent } from './routes/home/home.component';
 import { CreateContactComponent } from './routes/create-contact/create-contact.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { CreateContactComponent } from './routes/create-contact/create-contact.c
     DemandeMdpComponent,
     CreateUserComponent,
     HomeComponent,
+    FooterComponent,
     CreateContactComponent,
   ],
   imports: [

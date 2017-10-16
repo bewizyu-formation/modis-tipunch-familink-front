@@ -2,9 +2,8 @@
     display: flex;
     justify-content: center;
     margin-top : 100px;
-    
   }
-  
+
   .createUser-form {
     margin: 0 auto;
     width: 700px;
@@ -12,22 +11,18 @@
     border: 1px solid #CCC;
     border-radius: 1em;
   }
-  
+
   .createUser-form > * {
     width: 100%;
-  
   }
-  
+
   .createUser-form-message {
-    height: 10px;
-    width: 220px;
-    margin-top: 0;
-    margin-bottom: 20px;
+    margin-top: 25px;
     color: red;
     display: flex;
-    justify-content: flex-end
+    justify-content: center
   }
-  
+
   .createUser-form-row {
     display: flex;
     align-items: center;
@@ -39,11 +34,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 400px;
+    height: 450px;
   }
-  
+
+  .createUser-form-col > * {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+
   .createUser-form-button {
-    margin-top: 5px;
+    margin-top: 30px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -52,14 +52,13 @@
   label {
     /* Afin de s'assurer que toutes les étiquettes aient la même dimension et soient alignées correctement */
     display: inline-block;
-    width: 90px;
+    width: 100px;
     text-align: right;
-}
+  }
 
-.titre{
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  font: 2em sans-serif;
-}
-  
+  .titre{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font: 2em sans-serif;
+  }
