@@ -4,6 +4,8 @@ import {PASSWORD_VALIDATOR} from '../../validators/password.validator';
 import {HttpClient} from '@angular/common/http';
 import {ConfigService} from '../../services/config.service';
 import {AuthenticationService} from '../../services/authentication.service';
+import { Md5 } from 'ts-md5/dist/md5';
+import {NavigatorService, PATH_LOGIN} from '../../services/navigator.service';
 
 @Component({
   selector: 'app-update-mdp',
@@ -15,7 +17,8 @@ export class UpdateMdpComponent implements OnInit {
   constructor(
     private config: ConfigService,
     private http: HttpClient,
-    public authService: AuthenticationService, ) { }
+    public authService: AuthenticationService,
+    public nav: NavigatorService, ) { }
 
   password = new FormControl('', [Validators.required, Validators.pattern(PASSWORD_VALIDATOR)]);
   newPassword = new FormControl('', [Validators.required]);
@@ -38,11 +41,15 @@ export class UpdateMdpComponent implements OnInit {
     const postDataObjectToSend = {
       idUtilisateur: 2,
       email: 'celikbas.ahmet@gmail.com',
-      motDePasse: this.password.value,
-      IdContact: 3
+      motDePasse: Md5.hashStr(this.password.value).toString(),
+      IdContact: 3,
     };
     this.http.put(`${this.config.API_BASE}${this.config.API_ROUTES.UTILISATEUR}`, postDataObjectToSend).
-    subscribe( (liste) => console.log(liste),
+    subscribe( (liste) => {
+      console.log('COUCOU2LERETOUR')
+      console.log(liste);
+      this.nav.router.navigate([PATH_LOGIN]);
+      },
       (error) => console.log(error));
   }
 }

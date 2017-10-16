@@ -14,10 +14,10 @@ export class HeaderInterceptor implements HttpInterceptor {
       req.url.includes(`${this.config.API_BASE}${this.config.API_ROUTES.LOGIN}`) ||
       req.url.includes(`${this.config.API_BASE}${this.config.API_ROUTES.UTILISATEUR}`)
     ) {
-      return next.handle(req.clone({ setHeaders: {'Content-Type': 'application/json'}}));
+      return next.handle(req.clone({ setHeaders: {'Content-Type': 'application/json;charset=UTF-8'}}));
     } else {
       return next.handle(req.clone({ setHeaders: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json;charset=UTF-8',
         'Authorization': window.localStorage.getItem('token') ? window.localStorage.getItem('token') : '',
       }}));
     }
