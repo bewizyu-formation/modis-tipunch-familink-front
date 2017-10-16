@@ -31,12 +31,15 @@ export class AuthenticationService {
             window.localStorage.setItem('token', response['token']);
             this.fetchUserInfos().then(userInfos => {
               this.userInfos.next(userInfos);
-              // TODO: Changer la méthode fetchUserOwnedGroup en promise
-              this.fetchUserOwnedGroup();
-              setTimeout(() => {
-                this.isAuthenticated = true;
-                resolve(response['description']);
-              }, 500);
+              this.fetchUserOwnedGroup().then(userOwnedGroup => {
+                this.userOwnedGroup.next(userOwnedGroup);
+                setTimeout(() => {
+                  this.isAuthenticated = true;
+                  resolve(response['description']);
+                }, 500);
+              }, error => {
+                resolve('Une erreur est survenue');
+              });
             }, error => {
               resolve('Une erreur est survenue');
             });
@@ -127,6 +130,33 @@ export class AuthenticationService {
     });
   }
 
+  fetchUserOwnedGroup(): Promise<Groupe> {
+    return new Promise((resolve) => {
+      if (window.localStorage.getItem('token')) {
+        const userId = this.getUserIdFromToken(window.localStorage.getItem('token'));
+        this.http.get(`${this.config.API_BASE}${this.config.API_ROUTES.UTILISATEURS}${userId}
+           ${this.config.API_ROUTES.UTILISATEURSGROUPE}`).subscribe(
+          (response) => {
+            console.log(response);
+            resolve(
+              new Groupe(
+                1,
+                'Nom du groupe',
+                '10/10/2017 - 00:00'
+              )
+            );
+          },
+          (error) => {
+            this.destroyAuthentication();
+            console.log(error);
+          }
+        );
+
+      }
+    });
+  }
+
+  /*
   fetchUserOwnedGroup(): void {
     // TODO: remplacer les données mock par les donnnées d'une requete http vers l'api groupes
     this.userOwnedGroup.next(
@@ -137,11 +167,10 @@ export class AuthenticationService {
       )
     );
   }
+  */
 
   destroyAuthentication(): void {
     this.isAuthenticated = false;
-    this.userInfos = new Subject<Utilisateur>();
-    this.userOwnedGroup = new Subject<Groupe>();
     window.localStorage.removeItem('token');
   }
 

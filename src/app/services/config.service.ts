@@ -10,6 +10,7 @@ export class ConfigService {
     LOGIN: 'login',
     DEMANDEMDP: 'forgot-password',
     UTILISATEURS: 'utilisateurs/',
+    UTILISATEURSGROUPE: '/groupe',
   };
 
   constructor() { }
