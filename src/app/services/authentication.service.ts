@@ -80,7 +80,7 @@ export class AuthenticationService {
 
   createUser(userCredentials: Object) {
     return new Promise((resolve) => {
-      this.http.post(`${this.config.API_BASE}${this.config.API_ROUTES.CREATEACCOUNT}`, userCredentials).subscribe(
+      this.http.post(`${this.config.API_BASE}${this.config.API_ROUTES.UTILISATEURS}`, userCredentials).subscribe(
         (response) => {
           if (response['description'] === 'Utilisateur créé') {
             resolve('Votre compte a été créé.');
