@@ -6,6 +6,10 @@
 
 }
 
+.header__container:hover{
+  opacity: 0.8;
+}
+
 .header__navButtons{
   display: flex;
   justify-content: center;
@@ -47,19 +51,9 @@ margin-left: 20px;
   opacity: 0.8;
 }
 
-.body__container{
-  display: flex;
-}
-
 .body__container__text{
   width: 90%;
   text-align: center;
   font-size: 1.3em;
-  border: 1px solid black;
-  border-radius: 10px;
   margin: 0 auto;
-}
-
-.body__container{
-  margin-bottom: 300px;
 }

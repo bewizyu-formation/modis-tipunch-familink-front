@@ -36,6 +36,7 @@ import { HomeComponent } from './routes/home/home.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { GroupSelectionComponent } from './routes/group-selection/group-selection.component';
 import { GroupItemComponent } from './routes/group-selection/group-item/group-item.component';
+import {GroupService} from "./services/group.service";
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { GroupItemComponent } from './routes/group-selection/group-item/group-it
     ConfigService,
     NavigatorService,
     ProfilService,
+    GroupService,
     { provide: AuthenticationService, useClass: AuthenticationService },
     { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },

@@ -19,8 +19,13 @@ border-radius: 20px;
 }
 .group__createGroup{
   display: flex;
-  margin: auto 0;
+  align-items: center;
   justify-content: center;
+}
+.group__createGroup__input{
+  display: flex;
+flex-flow: column;
+
 }
 .group_text{
   text-align: center;
