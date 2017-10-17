@@ -15,6 +15,7 @@ export class ConfigService {
     PROFILS: 'profils/',
     GROUPES: 'groupes/',
     GROUPESCONTACT: '/contacts',
+    UPDATEPASSWORD: 'update-password/',
   };
 
   constructor() { }

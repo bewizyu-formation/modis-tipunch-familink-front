@@ -41,6 +41,7 @@ import { ContactListComponent } from './routes/groupe/contact-list/contact-list.
 import { SelectedContactComponent } from './routes/groupe/selected-contact/selected-contact.component';
 import { ContactService } from './services/contact.service';
 import { ContactListPipe } from './pipes/contact-list.pipe';
+import { UpdateMdpComponent } from './routes/update-mdp/update-mdp.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { ContactListPipe } from './pipes/contact-list.pipe';
     ContactListComponent,
     SelectedContactComponent,
     ContactListPipe,
+    UpdateMdpComponent,
   ],
   imports: [
     BrowserModule,

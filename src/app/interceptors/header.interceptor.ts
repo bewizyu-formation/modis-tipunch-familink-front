@@ -22,6 +22,5 @@ export class HeaderInterceptor implements HttpInterceptor {
         'Authorization': window.localStorage.getItem('token') ? window.localStorage.getItem('token') : '',
       }}));
     }
-
   }
 }

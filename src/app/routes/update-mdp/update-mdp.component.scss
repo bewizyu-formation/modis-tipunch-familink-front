@@ -1,0 +1,38 @@
+.update-mdp-container {
+  display: flex;
+  justify-content: center;
+}
+
+.update-mdp-form {
+  margin-top: 100px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.update-mdp-form > * {
+  width: 100%;
+}
+
+.update-mdp-title {
+  height: 100px;
+  font-weight: bold;
+  font-size: 30px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.update-mdp-form-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.update-mdp-form-button {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
