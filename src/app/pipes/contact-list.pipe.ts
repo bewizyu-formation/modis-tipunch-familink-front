@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ContactListPipe implements PipeTransform {
 
   transform(value, args: string) {
-    if(args !== undefined) {
+    if (args !== undefined) {
       return value.filter((item) => {
         return  item['nom'].toLowerCase().includes(args.toLowerCase()) ||
                 item['prenom'].toLowerCase().includes(args.toLowerCase()) ||

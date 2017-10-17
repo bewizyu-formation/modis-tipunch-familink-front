@@ -10,8 +10,8 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
-  path_login=PATH_LOGIN;
- path_create_account=PATH_CREATE_ACCOUNT;
+  path_login = PATH_LOGIN;
+  path_create_account = PATH_CREATE_ACCOUNT;
 
   ngOnInit() {
   }
