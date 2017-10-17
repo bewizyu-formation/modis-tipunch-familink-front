@@ -1,9 +1,11 @@
 <div class="header__image"></div>
 
+<div *ngIf="isUserDataFetched">
+
 <div class="group__container">
   <label class="group_label">Mon Groupe : </label>
 
-  <div class="create-group" *ngIf="ownerHasNoGroup; else ownerHasGroup">
+  <div class="create-group" *ngIf="userOwnedGroup.idGroupe === 0">
     <p class="group_text">Vous n'avez pas de groupes, remplissez le champ ci-dessous pour en ajouter un : </p>
     <div class="group__createGroup">
       <div class="group__createGroup__input">
@@ -12,19 +14,11 @@
           <mat-error *ngIf="nom.invalid">{{ getGroupeEmptyErrorMessage() }}</mat-error>
         </mat-form-field>
       </div>
-    <button *ngIf="nom.invalid" class="group_button" color="primary" mat-raised-button disabled>Créer Groupe</button>
-    <button *ngIf="nom.valid" class="group_button" (click)="createGroup()" color="primary" mat-raised-button>Créer Groupe</button>
+      <button *ngIf="nom.invalid" class="group_button" color="primary" mat-raised-button disabled>Créer Groupe</button>
+      <button *ngIf="nom.valid" class="group_button" (click)="createGroup()" color="primary" mat-raised-button>Créer Groupe</button>
+    </div>
   </div>
-  </div>
-<ng-template #ownerHasGroup>
-  <div class="groupOwner__container" >
-    <app-group-item><!--{{groupOwner}}--> tata</app-group-item>
-  </div>
-</ng-template>
-
-
-
-
+  <mat-card class="groupeCard" *ngIf="userOwnedGroup.idGroupe !== 0" (click)="openGroup(userOwnedGroup.idGroupe)"><h1>{{userOwnedGroup.nom}}</h1></mat-card>
 
 </div>
 
@@ -32,8 +26,9 @@
   <label class="Groups_label">Mes autres Groupes : </label>
   <mat-nav-list #groups>
     <mat-list-item *ngFor="let group of Groups">
-      <app-group-item><!--{{group}}--></app-group-item>
+
     </mat-list-item>
   </mat-nav-list>
 </div>
 
+</div>

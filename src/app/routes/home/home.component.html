@@ -1,6 +1,6 @@
 <div class="home__container">
   <div class="header__container">
-    <div class="header__navButtons">
+    <div class="header__navButtons" *ngIf="!authService.isAuthenticated">
 
       <button mat-raised-button color="primary" class="header__navButtons__connexion" [routerLink]="path_login">Se
         Connecter

@@ -25,6 +25,8 @@ import {  MatProgressBarModule,
           MatInputModule,
           MatButtonModule,
           MatSelectModule,
+          MatSnackBarModule,
+          MatCardModule,
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -35,8 +37,7 @@ import { CreateUserComponent } from './routes/create-user/create-user.component'
 import { HomeComponent } from './routes/home/home.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { GroupSelectionComponent } from './routes/group-selection/group-selection.component';
-import { GroupItemComponent } from './routes/group-selection/group-item/group-item.component';
-import {GroupService} from "./services/group.service";
+import { GroupService } from './services/group.service';
 
 
 @NgModule({
@@ -49,7 +50,6 @@ import {GroupService} from "./services/group.service";
     HomeComponent,
     FooterComponent,
     GroupSelectionComponent,
-    GroupItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +65,9 @@ import {GroupService} from "./services/group.service";
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule,
+    MatCardModule,
   ],
   providers: [
     ConfigService,

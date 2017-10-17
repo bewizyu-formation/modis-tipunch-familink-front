@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 
 // Services
 import { ConfigService } from '../../services/config.service';
 import { AuthenticationService } from '../../services/authentication.service';
-import {  NavigatorService, PATH_HOME, PATH_LOGIN, PATH_PROFIL, PATH_GROUPES} from '../../services/navigator.service';
+import {  NavigatorService, PATH_HOME, PATH_LOGIN, PATH_PROFIL, PATH_GROUP_SELECTION} from '../../services/navigator.service';
 
 // Models
 import { Utilisateur } from '../../models/Utilisateur';
@@ -25,13 +26,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   path_home = PATH_HOME;
   path_profil = PATH_PROFIL;
-  path_groupes = PATH_GROUPES;
+  path_groupes = PATH_GROUP_SELECTION;
 
 
   constructor(
     public config: ConfigService,
     public nav: NavigatorService,
     public authService: AuthenticationService,
+    public snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -43,10 +45,18 @@ export class NavbarComponent implements OnInit, OnDestroy {
     });
 
     // fetch users datas if the user is authenticated
-    if (this.authService.isAuthenticated) {
-      this.authService.fetchUserInfos();
-      this.authService.fetchUserOwnedGroup();
+    if (window.localStorage.getItem('token')) {
+      this.authService.autoAuthFromToken().then((success) => {
+        if (!success) {
+          console.log('need to relog');
+          this.snackBar.open('VOTRE CONNEXION N\'EST PLUS VALIDE.', 'SE RECONNECTER')
+            .onAction().subscribe(() => {
+            this.logout();
+          });
+        }
+      });
     }
+
 
   }
 

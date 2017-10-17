@@ -50,3 +50,13 @@ flex-flow: column;
 .Groups_label{
   font-weight: bold;
 }
+
+
+.groupeCard {
+  margin: 10px;
+  cursor: pointer;
+  h1 {
+    font-weight: 400;
+    text-align: center;
+  }
+}
