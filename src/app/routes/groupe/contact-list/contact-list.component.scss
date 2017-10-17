@@ -1,0 +1,31 @@
+
+
+.topbar {
+  margin-left: 10px;
+  display: flex;
+  justify-content: space-between;
+
+  .listActions {
+    display: flex;
+    align-items: center;
+  }
+}
+
+
+.contactsList {
+  width: 300px;
+  overflow-y: scroll;
+  border: 1px solid black;
+  padding: 0 10px;
+  height: 100%;
+
+
+  .contact {
+    margin: 15px 0;
+    background-color: #FFFFFF;
+    display: flex;
+    padding: 10px;
+    height: 100px;
+  }
+}
+

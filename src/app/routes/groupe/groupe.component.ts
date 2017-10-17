@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-groupe',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GroupeComponent implements OnInit {
 
-  constructor() { }
+  idGroupe: number;
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    console.log(this.route.snapshot.paramMap.get('idGroupe'));
   }
 
 }

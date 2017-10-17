@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Contact} from '../../../models/Contact';
 
 @Component({
   selector: 'app-contact-list',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contact-list.component.scss']
 })
 export class ContactListComponent implements OnInit {
+
+  contactList: Array<Contact> = [];
 
   constructor() { }
 

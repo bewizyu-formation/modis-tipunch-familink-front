@@ -25,6 +25,7 @@ import {  MatProgressBarModule,
           MatInputModule,
           MatButtonModule,
           MatSelectModule,
+          MatCardModule,
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -66,7 +67,8 @@ import { SelectedContactComponent } from './routes/groupe/selected-contact/selec
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCardModule,
   ],
   providers: [
     ConfigService,
