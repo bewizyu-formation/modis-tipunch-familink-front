@@ -1,38 +1,39 @@
 <div class="createContact-container">
   <form class="createContact-form" (submit)="createContact()">
+    <p class="titre">Créer un Contact</p>
 
-    <p class="titre">Créer un contact</p>
     <div class="createContact-form-row">
       <div class="createContact-form-col">
         <div>
           <label>Email : </label>
           <mat-form-field>
-            <input matInput placeholder="Saisir email" [formControl]="email" name="email" required />
-            <mat-error *ngIf="email.invalid">{{ getEmailErrorMessage() }}</mat-error>
+            <input matInput placeholder="Saisir email" [formControl]="requieredFormsGroup.get('email')" name="email" required />
+            <mat-error *ngIf="requieredFormsGroup.get('email').invalid">{{ getEmailErrorMessage() }}</mat-error>
           </mat-form-field>
         </div>
         <div>
           <label>Nom : </label>
           <mat-form-field>
-            <input matInput placeholder="Saisir le nom" [formControl]="nom" name="nom" required />
-            <mat-error *ngIf="nom.invalid">{{ getNomErrorMessage() }}</mat-error>
+            <input matInput placeholder="Saisir le nom" [formControl]="requieredFormsGroup.get('nom')" name="nom" required />
+            <mat-error *ngIf="requieredFormsGroup.get('nom').invalid">{{ getNomErrorMessage() }}</mat-error>
           </mat-form-field>
         </div>
         <div>
           <label>Prénom : </label>
           <mat-form-field>
-            <input matInput placeholder="Saisir le prénom" [formControl]="prenom" name="prenom" required />
-            <mat-error *ngIf="prenom.invalid">{{ getPrenomErrorMessage() }}</mat-error>
+            <input matInput placeholder="Saisir le prénom" [formControl]="requieredFormsGroup.get('prenom')" name="prenom" required />
+            <mat-error *ngIf="requieredFormsGroup.get('prenom').invalid">{{ getPrenomErrorMessage() }}</mat-error>
           </mat-form-field>
         </div>
         <div>
           <label>Profil : </label>
           <mat-form-field>
-            <mat-select placeholder="Sélectionner un profil" [(ngModel)]="selectedValue" name="profil">
+            <mat-select placeholder="Sélectionner un profil" [formControl]="requieredFormsGroup.get('profil')" name="profil" required>
               <mat-option *ngFor="let profil of profils" [value]="profil.idProfil">
                 {{ profil.nom }}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="requieredFormsGroup.get('profil').invalid">{{ getProfilErrorMessage() }}</mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -41,7 +42,8 @@
         <div>
           <label>Gravatar : </label>
           <mat-form-field>
-            <input matInput placeholder="Saisir le gravatar" [(ngModel)]="gravatar" name="gravatar"/>
+            <input matInput placeholder="Saisir le gravatar" [formControl]="gravatar" name="gravatar" />
+            <mat-error *ngIf="gravatar.invalid">{{ getGravatarErrorMessage() }}</mat-error>
           </mat-form-field>
         </div>
         <div>
@@ -53,7 +55,8 @@
         <div>
           <label>Code postal : </label>
           <mat-form-field>
-            <input matInput placeholder="Saisir le code postal" [(ngModel)]="codePostal" name="codePostal" />
+            <input matInput placeholder="Saisir le code postal" [formControl]="codePostal" name="codePostal" />
+            <mat-error *ngIf="codePostal.invalid">{{ getCodePostalErrorMessage() }}</mat-error>
           </mat-form-field>
         </div>
         <div>
@@ -65,26 +68,24 @@
         <div>
           <label>Téléphone : </label>
           <mat-form-field>
-            <input matInput placeholder="Saisir le téléphone" [formControl]="numTel" name="numTel" required />
-            <mat-error *ngIf="numTel.invalid">{{ getNumTelErrorMessage() }}</mat-error>
+            <input matInput placeholder="Saisir le téléphone" [formControl]="requieredFormsGroup.get('numTel')" name="numTel" required />
+            <mat-error *ngIf="requieredFormsGroup.get('numTel').invalid">{{ getNumTelErrorMessage() }}</mat-error>
           </mat-form-field>
+        </div>
+        <div>
+          <span class="createContact-form-message">{{ formCreateContactMessage }}</span>
         </div>
       </div>
     </div>
 
     <div class="createContact-form-row">
-      <span class="createContact-form-message">{{ formcreateContactMessage }}</span>
-    </div>
-
-    <div class="createContact-form-row">
       <div class="createContact-form-button">
-        <button *ngIf="!loading && (numTel.valid )" type="submit" mat-raised-button color="primary">Valider</button>
-        <button *ngIf="!loading && (numTel.invalid)" type="submit" mat-raised-button color="primary" disabled>Valider</button>
-        <button *ngIf="loading" type="submit" mat-raised-button color="primary" disabled>Vérification en cours ...</button>
+        <button *ngIf="!isProcessing && isFormValid()" type="submit" mat-raised-button color="primary">Valider</button>
+        <button *ngIf="!isProcessing && !isFormValid()" type="submit" mat-raised-button color="primary" disabled>Valider</button>
+        <button *ngIf="isProcessing" type="submit" mat-raised-button color="primary" disabled>Création du compte  ...</button>
       </div>
       <div class="createContact-form-button">
-        <button *ngIf="!loading && (numTel.valid )" type="reset" mat-raised-button color="primary">Annuler</button>
-        <button *ngIf="!loading && (numTel.invalid)" type="reset" mat-raised-button color="primary" disabled>Annuler</button>
+        <button mat-raised-button (click)="navigateToHome()">Annuler</button>
       </div>
     </div>
   </form>

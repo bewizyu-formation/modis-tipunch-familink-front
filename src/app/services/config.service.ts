@@ -14,6 +14,8 @@ export class ConfigService {
     UTILISATEURSGROUPE: '/groupe',
     PROFILS: 'profils/',
     CONTACTS: 'contacts/',
+    GROUPES: 'groupes/',
+    GROUPECONTACTS: '/contact',
   };
 
   constructor() { }

@@ -35,6 +35,7 @@ import { CreateUserComponent } from './routes/create-user/create-user.component'
 import { HomeComponent } from './routes/home/home.component';
 import { CreateContactComponent } from './routes/create-contact/create-contact.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { ContactService } from './services/contact.service';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { FooterComponent } from './shared/footer/footer.component';
     ConfigService,
     NavigatorService,
     ProfilService,
+    ContactService,
     { provide: AuthenticationService, useClass: AuthenticationService },
     { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },

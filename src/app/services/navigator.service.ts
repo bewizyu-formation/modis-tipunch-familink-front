@@ -7,7 +7,8 @@ export const PATH_GROUPES = 'groupes';
 export const PATH_LOGIN = 'login';
 export const PATH_CREATE_ACCOUNT = 'create-account';
 export const PATH_FORGOT_PASSWORD = 'forgot-password';
-export const PATH_CREATE_CONTACT = 'create-contact';
+export const PATH_GROUP_SELECTION = 'group-selection';
+export const PATH_CREATE_CONTACT = PATH_GROUP_SELECTION + '/:idGroupe/create-contact';
 
 @Injectable()
 export class NavigatorService {
