@@ -1,0 +1,47 @@
+
+<mat-card class="selectedContactContainer" [class.noContactSelected]="!selectedContact">
+  <h1 *ngIf="!selectedContact">Sélectionner un contact.</h1>
+
+
+  <div class="selectedContact" *ngIf="selectedContact">
+    <div class="contact">
+      <div class="gravatar" [style.border-color]="_selectedContact.profil.couleur">
+        <img [src]="_selectedContact.gravatar" alt="gravatar"/>
+      </div>
+      <div class="name-profil">
+        <h2 class="name">{{_selectedContact.nom}} {{_selectedContact.prenom}}</h2>
+        <h4 class="profil">{{_selectedContact.profil.nom}}</h4>
+      </div>
+      <div class="actionButtons">
+        <button mat-icon-button>
+          <mat-icon>mode_edit</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon>star_border</mat-icon>
+        </button>
+      </div>
+    </div>
+
+
+    <mat-tab-group class="details">
+      <mat-tab label="Infos">
+
+        <p>{{_selectedContact.adresse}}</p>
+        <p>{{_selectedContact.codePostal}} {{_selectedContact.ville}}</p>
+        <p>{{_selectedContact.numTel}}</p>
+        <br />
+        <p>{{_selectedContact.email}}</p>
+
+      </mat-tab>
+      <mat-tab label="Messages">
+
+        <h1>Messages</h1>
+
+      </mat-tab>
+    </mat-tab-group>
+
+
+
+  </div>
+
+</mat-card>

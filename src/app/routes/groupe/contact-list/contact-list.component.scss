@@ -1,0 +1,85 @@
+
+
+.topbar {
+  margin-left: 10px;
+  display: flex;
+  justify-content: space-between;
+
+  .listActions {
+    display: flex;
+    align-items: center;
+  }
+}
+
+
+
+.contactsListSpinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contactsList {
+  width: 300px;
+  overflow-y: scroll;
+  align-items: center;
+  padding: 0 10px;
+  height: 100%;
+
+  .noContact {
+    text-align: center;
+  }
+
+  .contact {
+    margin: 15px 0;
+    background-color: #FFFFFF;
+    display: flex;
+    padding: 10px;
+    min-height: 50px;
+    border-radius: 1em;
+    cursor: pointer;
+    border: 1px solid #FFFFFF;
+    .gravatar {
+      border: 3px solid;
+      padding: 0;
+      margin: 0;
+      width: 77px;
+      height: 77px;
+
+      img {
+        width: 74px;
+        height: 74px;
+      }
+    }
+
+    .name-profil {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: auto;
+      padding-left: 10px;
+
+      .name {
+        font-weight: 400;
+        margin: 0;
+      }
+
+      .profil {
+        font-weight: 400;
+        margin: 0;
+      }
+
+    }
+
+
+
+
+  }
+
+  .contact:hover {
+    background-color: #CCCCCC;
+    border: 1px solid #FFFFFF;
+  }
+
+}
+

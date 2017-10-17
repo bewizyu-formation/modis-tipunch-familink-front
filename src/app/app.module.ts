@@ -6,8 +6,6 @@ import { ROUTES } from './app.routes';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-
-
 /* Services */
 import { ConfigService } from './services/config.service';
 import { NavigatorService } from './services/navigator.service';
@@ -17,14 +15,18 @@ import { ProfilService } from './services/profil.service';
 import { HeaderInterceptor } from './interceptors/header.interceptor';
 import { AuthenticationInterceptor } from './interceptors/authentication.interceptor';
 
-import {  MatProgressBarModule,
-          MatIconModule,
-          MatToolbarModule,
-          MatMenuModule,
-          MatFormFieldModule,
-          MatInputModule,
-          MatButtonModule,
-          MatSelectModule,
+import {
+  MatProgressBarModule,
+  MatIconModule,
+  MatToolbarModule,
+  MatMenuModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  MatSelectModule,
+  MatCardModule,
+  MatProgressSpinnerModule,
+  MatTabsModule,
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -34,6 +36,11 @@ import { DemandeMdpComponent } from './routes/demande-mdp/demande-mdp.component'
 import { CreateUserComponent } from './routes/create-user/create-user.component';
 import { HomeComponent } from './routes/home/home.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { GroupeComponent } from './routes/groupe/groupe.component';
+import { ContactListComponent } from './routes/groupe/contact-list/contact-list.component';
+import { SelectedContactComponent } from './routes/groupe/selected-contact/selected-contact.component';
+import { ContactService } from './services/contact.service';
+import { ContactListPipe } from './pipes/contact-list.pipe';
 import { UpdateMdpComponent } from './routes/update-mdp/update-mdp.component';
 
 
@@ -46,6 +53,10 @@ import { UpdateMdpComponent } from './routes/update-mdp/update-mdp.component';
     CreateUserComponent,
     HomeComponent,
     FooterComponent,
+    GroupeComponent,
+    ContactListComponent,
+    SelectedContactComponent,
+    ContactListPipe,
     UpdateMdpComponent,
   ],
   imports: [
@@ -62,12 +73,16 @@ import { UpdateMdpComponent } from './routes/update-mdp/update-mdp.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    MatTabsModule,
   ],
   providers: [
     ConfigService,
     NavigatorService,
     ProfilService,
+    ContactService,
     { provide: AuthenticationService, useClass: AuthenticationService },
     { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },

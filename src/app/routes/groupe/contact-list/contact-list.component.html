@@ -1,0 +1,38 @@
+<div class="topbar">
+  <mat-form-field>
+    <mat-placeholder><mat-icon>search</mat-icon> Filtrer</mat-placeholder>
+    <input matInput [(ngModel)]="filterInputValue">
+  </mat-form-field>
+  <div class="listActions">
+    <button mat-icon-button>
+      <mat-icon>person_add</mat-icon>
+    </button>
+    <button mat-icon-button (click)="loadContactList()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+</div>
+
+
+<div class="contactsList" [class.contactsListSpinner]="isLoading">
+
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+  <div *ngIf="!isLoading">
+
+    <h3 class="noContact" *ngIf="contacts.length === 0">Aucun contacts</h3>
+    <div *ngIf="contacts.length > 0">
+      <mat-card class="contact" *ngFor="let contact of contacts | contactList:filterInputValue" (click)="selectContact(contact)">
+        <div class="gravatar" [style.border-color]="contact.profil.couleur">
+          <img [src]="contact.gravatar" alt="gravatar"/>
+        </div>
+
+        <div class="name-profil">
+          <h2 class="name">{{contact.nom}} {{contact.prenom}}</h2>
+          <h4 class="profil">{{contact.profil.nom}}</h4>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+</div>

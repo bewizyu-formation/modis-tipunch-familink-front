@@ -13,6 +13,8 @@ export class ConfigService {
     UTILISATEURS: 'utilisateurs/',
     UTILISATEURSGROUPE: '/groupe',
     PROFILS: 'profils/',
+    GROUPES: 'groupes/',
+    GROUPESCONTACT: '/contacts',
     UPDATEPASSWORD: 'update-password/',
   };
 
