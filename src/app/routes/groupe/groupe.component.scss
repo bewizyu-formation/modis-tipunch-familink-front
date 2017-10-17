@@ -1,0 +1,12 @@
+.groupe {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  app-contact-list {
+    width: 300px;
+  }
+
+  app-selected-contact {
+    flex: auto;
+  }
+}
