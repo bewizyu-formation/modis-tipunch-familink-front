@@ -1,148 +1,38 @@
 <div class="topbar">
   <mat-form-field>
     <mat-placeholder><mat-icon>search</mat-icon> Filtrer</mat-placeholder>
-    <input matInput>
+    <input matInput [(ngModel)]="filterInputValue">
   </mat-form-field>
   <div class="listActions">
     <button mat-icon-button>
       <mat-icon>person_add</mat-icon>
     </button>
-    <button mat-icon-button>
+    <button mat-icon-button (click)="loadContactList()">
       <mat-icon>refresh</mat-icon>
     </button>
   </div>
 </div>
 
 
-<div class="contactsList">
-  <mat-card class="contact">
-    <div class="contact-contact-name">
-      Ahmet Celikbas
-    </div>
-    <div class="">
+<div class="contactsList" [class.contactsListSpinner]="isLoading">
 
-    </div>
-  </mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
 
-  <mat-card class="contact">
-    <div class="contact-contact-name">
-      Ahmet Celikbas
-    </div>
-    <div class="">
-    </div>
-  </mat-card>
+  <div *ngIf="!isLoading">
 
-  <mat-card class="contact">
-    <div class="contact-contact-name">
-      Ahmet Celikbas
-    </div>
-    <div class="">
-    </div>
-  </mat-card>
+    <h3 class="noContact" *ngIf="contacts.length === 0">Aucun contacts</h3>
+    <div *ngIf="contacts.length > 0">
+      <mat-card class="contact" *ngFor="let contact of contacts | contactList:filterInputValue" (click)="selectContact(contact)">
+        <div class="gravatar" [style.border-color]="contact.profil.couleur">
+          <img [src]="contact.gravatar" alt="gravatar"/>
+        </div>
 
-  <mat-card class="contact">
-    <div class="contact-contact-name">
-      Ahmet Celikbas
+        <div class="name-profil">
+          <h2 class="name">{{contact.nom}} {{contact.prenom}}</h2>
+          <h4 class="profil">{{contact.profil.nom}}</h4>
+        </div>
+      </mat-card>
     </div>
-    <div class="">
-    </div>
-  </mat-card>
-
-  <mat-card class="contact">
-    <div class="contact-contact-name">
-      Ahmet Celikbas
-    </div>
-    <div class="">
-    </div>
-  </mat-card>
-
-  <mat-card class="contact">
-    <div class="contact-contact-name">
-      Ahmet Celikbas
-    </div>
-    <div class="">
-    </div>
-  </mat-card>
-
-  <mat-card class="contact">
-    <div class="contact-contact-name">
-      Ahmet Celikbas
-    </div>
-    <div class="">
-    </div>
-  </mat-card>
-
-  <mat-card class="contact">
-    <div class="contact-contact-name">
-      Ahmet Celikbas
-    </div>
-    <div class="">
-    </div>
-  </mat-card>
-
-  <mat-card class="contact">
-    <div class="contact-contact-name">
-      Ahmet Celikbas
-    </div>
-    <div class="">
-    </div>
-  </mat-card>
-
-  <mat-card class="contact">
-    <div class="contact-contact-name">
-      Ahmet Celikbas
-    </div>
-    <div class="">
-    </div>
-  </mat-card>
-
-  <mat-card class="contact">
-    <div class="contact-contact-name">
-      Ahmet Celikbas
-    </div>
-    <div class="">
-    </div>
-  </mat-card>
-
-  <mat-card class="contact">
-    <div class="contact-contact-name">
-      Ahmet Celikbas
-    </div>
-    <div class="">
-    </div>
-  </mat-card>
-
-  <mat-card class="contact">
-    <div class="contact-contact-name">
-      Ahmet Celikbas
-    </div>
-    <div class="">
-    </div>
-  </mat-card>
-
-  <mat-card class="contact">
-    <div class="contact-contact-name">
-      Ahmet Celikbas
-    </div>
-    <div class="">
-    </div>
-  </mat-card>
-
-  <mat-card class="contact">
-    <div class="contact-contact-name">
-      Ahmet Celikbas
-    </div>
-    <div class="">
-    </div>
-  </mat-card>
-
-  <mat-card class="contact">
-    <div class="contact-contact-name">
-      Ahmet Celikbas
-    </div>
-    <div class="">
-    </div>
-  </mat-card>
-
+  </div>
 
 </div>

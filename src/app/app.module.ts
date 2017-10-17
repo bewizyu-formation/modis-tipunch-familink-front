@@ -6,8 +6,6 @@ import { ROUTES } from './app.routes';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-
-
 /* Services */
 import { ConfigService } from './services/config.service';
 import { NavigatorService } from './services/navigator.service';
@@ -17,15 +15,18 @@ import { ProfilService } from './services/profil.service';
 import { HeaderInterceptor } from './interceptors/header.interceptor';
 import { AuthenticationInterceptor } from './interceptors/authentication.interceptor';
 
-import {  MatProgressBarModule,
-          MatIconModule,
-          MatToolbarModule,
-          MatMenuModule,
-          MatFormFieldModule,
-          MatInputModule,
-          MatButtonModule,
-          MatSelectModule,
-          MatCardModule,
+import {
+  MatProgressBarModule,
+  MatIconModule,
+  MatToolbarModule,
+  MatMenuModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  MatSelectModule,
+  MatCardModule,
+  MatProgressSpinnerModule,
+  MatTabsModule,
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -38,6 +39,8 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { GroupeComponent } from './routes/groupe/groupe.component';
 import { ContactListComponent } from './routes/groupe/contact-list/contact-list.component';
 import { SelectedContactComponent } from './routes/groupe/selected-contact/selected-contact.component';
+import { ContactService } from './services/contact.service';
+import { ContactListPipe } from './pipes/contact-list.pipe';
 
 
 @NgModule({
@@ -52,6 +55,7 @@ import { SelectedContactComponent } from './routes/groupe/selected-contact/selec
     GroupeComponent,
     ContactListComponent,
     SelectedContactComponent,
+    ContactListPipe,
   ],
   imports: [
     BrowserModule,
@@ -69,11 +73,14 @@ import { SelectedContactComponent } from './routes/groupe/selected-contact/selec
     MatButtonModule,
     MatSelectModule,
     MatCardModule,
+    MatProgressSpinnerModule,
+    MatTabsModule,
   ],
   providers: [
     ConfigService,
     NavigatorService,
     ProfilService,
+    ContactService,
     { provide: AuthenticationService, useClass: AuthenticationService },
     { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },

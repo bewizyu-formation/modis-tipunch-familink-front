@@ -7,9 +7,17 @@
     width: 300px;
     display: flex;
     flex-direction: column;
+    border: 1px solid #CCC;
+    border-radius: 1em;
+    border-right: 0px;
   }
 
   app-selected-contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex: auto;
+    border: 1px solid #CCC;
+    border-radius: 1em;
   }
 }
