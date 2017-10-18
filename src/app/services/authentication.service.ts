@@ -29,21 +29,16 @@ export class AuthenticationService {
         (response) => {
           if (response['description'] === 'Connexion réussie') {
             window.localStorage.setItem('token', response['token']);
-            this.fetchUserInfos().then(userInfos => {
-              this.userInfos.next(userInfos);
-              this.fetchUserOwnedGroup().then(userOwnedGroup => {
-                this.userOwnedGroup.next(userOwnedGroup);
+            this.fetchUserDataFromToken().then((success) => {
+              if (success === true) {
                 setTimeout(() => {
                   this.isAuthenticated = true;
                   resolve(response['description']);
                 }, 500);
-              }, error => {
+              } else {
                 resolve('Une erreur est survenue');
-              });
-            }, error => {
-              resolve('Une erreur est survenue');
+              }
             });
-
           } else {
             this.destroyAuthentication();
             resolve(response['description']);
@@ -54,6 +49,15 @@ export class AuthenticationService {
           resolve('Une erreur est survenue.');
         }
       );
+    });
+  }
+
+  autoAuthFromToken() {
+    return new Promise((resolve) => {
+      this.fetchUserDataFromToken().then((success) => {
+        this.isAuthenticated = true;
+        resolve(success);
+      });
     });
   }
 
@@ -95,6 +99,21 @@ export class AuthenticationService {
     });
   }
 
+  fetchUserDataFromToken() {
+    return new Promise((resolve) => {
+      this.fetchUserInfos().then(userInfos => {
+        this.userInfos.next(userInfos);
+        this.fetchUserOwnedGroup().then(userOwnedGroup => {
+          this.userOwnedGroup.next(userOwnedGroup);
+          resolve(true);
+        }, error => {
+          resolve(false);
+        });
+      }, error => {
+        resolve(false);
+      });
+    });
+  }
 
   getUserIdFromToken(token: string): number {
     const decodedToken = atob(token);
@@ -106,7 +125,6 @@ export class AuthenticationService {
       throw new Error('Cannot parse user id from token');
     }
   }
-
 
   fetchUserInfos(): Promise<Utilisateur> {
     return new Promise((resolve) => {

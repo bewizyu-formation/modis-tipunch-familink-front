@@ -27,6 +27,7 @@ import {
   MatCardModule,
   MatProgressSpinnerModule,
   MatTabsModule,
+  MatSnackBarModule,
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -42,6 +43,8 @@ import { SelectedContactComponent } from './routes/groupe/selected-contact/selec
 import { ContactService } from './services/contact.service';
 import { ContactListPipe } from './pipes/contact-list.pipe';
 import { UpdateMdpComponent } from './routes/update-mdp/update-mdp.component';
+import { GroupSelectionComponent } from './routes/group-selection/group-selection.component';
+import { GroupService } from './services/group.service';
 
 
 @NgModule({
@@ -58,6 +61,7 @@ import { UpdateMdpComponent } from './routes/update-mdp/update-mdp.component';
     SelectedContactComponent,
     ContactListPipe,
     UpdateMdpComponent,
+    GroupSelectionComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,12 +81,16 @@ import { UpdateMdpComponent } from './routes/update-mdp/update-mdp.component';
     MatCardModule,
     MatProgressSpinnerModule,
     MatTabsModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    MatCardModule,
   ],
   providers: [
     ConfigService,
     NavigatorService,
     ProfilService,
     ContactService,
+    GroupService,
     { provide: AuthenticationService, useClass: AuthenticationService },
     { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },

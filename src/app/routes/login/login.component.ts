@@ -6,7 +6,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 import { ConfigService } from '../../services/config.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import {  NavigatorService,
-          PATH_HOME,
+          PATH_GROUP_SELECTION,
           PATH_CREATE_ACCOUNT,
           PATH_FORGOT_PASSWORD } from '../../services/navigator.service';
 
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         this.authenticationMessage = loginAttempt;
         this.authenticating = false;
         if (this.authService.isAuthenticated) {
-          this.nav.router.navigate([PATH_CREATE_ACCOUNT]);
+          this.nav.router.navigate([PATH_GROUP_SELECTION]);
         }
         }, (error: string) => {
         this.authenticationMessage = error;

@@ -1,0 +1,38 @@
+<div class="header__image"></div>
+
+<div *ngIf="isUserDataFetched">
+
+  <div class="group__container">
+    <label class="group_label">Mon Groupe : </label>
+
+    <div class="create-group" *ngIf="!isProcessing && userOwnedGroup.idGroupe === 0">
+      <p class="group_text">Vous n'avez pas de groupes, remplissez le champ ci-dessous pour en ajouter un : </p>
+      <div class="group__createGroup">
+        <div class="group__createGroup__input">
+          <mat-form-field>
+            <input matInput placeholder="Entrer le Nom du Groupe" [formControl]="nom" name="nom" required />
+            <mat-error *ngIf="nom.invalid">{{ getGroupeEmptyErrorMessage() }}</mat-error>
+          </mat-form-field>
+        </div>
+        <button *ngIf="nom.invalid" class="group_button" color="primary" mat-raised-button disabled>Créer Groupe</button>
+        <button *ngIf="nom.valid" class="group_button" (click)="createGroup()" color="primary" mat-raised-button>Créer Groupe</button>
+      </div>
+    </div>
+    <mat-card class="groupeCard spinnerCard" *ngIf="isProcessing"><mat-spinner></mat-spinner></mat-card>
+    <mat-card class="groupeCard" *ngIf="userOwnedGroup.idGroupe !== 0" (click)="openGroup(userOwnedGroup.idGroupe)"><h1>{{userOwnedGroup.nom}}</h1></mat-card>
+  </div>
+
+  <div class="Groups__container">
+    <label class="Groups_label">Mes autres Groupes : </label>
+    <mat-nav-list #groups>
+      <mat-list-item *ngFor="let group of groupes">
+        <mat-card class="groupeCard" (click)="openGroup(group[0])"><h1>{{group[2]}}</h1></mat-card>
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
+
+</div>
+
+<div class="initSpinner spinnerCard" *ngIf="!isUserDataFetched">
+  <mat-spinner></mat-spinner>
+</div>
