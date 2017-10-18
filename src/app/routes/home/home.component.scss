@@ -1,18 +1,22 @@
 .header__container{
   background-image: url("../../../assets/family.jpg");
-  height: 270px;
+  height: 350px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-
 }
 
 .header__navButtons{
   display: flex;
   justify-content: center;
+
 }
 .header__navButtons__connexion {
- margin-top: 210px;
- margin-right: 20px;
+   margin-top: 260px;
+  margin-right: 20px;
+  font-size: 24px;
+  height: 50px;
+  border: solid white 1px;
+  border-radius: 10px;
 }
 .header__container__accroche{
   text-align: center;
@@ -23,8 +27,12 @@
 }
 
 .header__navButtons__creerCompte{
-  margin-top: 210px;
-margin-left: 20px;
+  margin-top: 260px;
+  margin-left: 20px;
+  font-size: 24px;
+  height: 50px;
+  border: solid white 1px;
+  border-radius: 10px;
 }
 
 .header_container__accroche__title{
