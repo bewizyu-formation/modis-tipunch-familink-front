@@ -60,3 +60,13 @@ flex-flow: column;
     text-align: center;
   }
 }
+
+.spinnerCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.initSpinner {
+  margin: 40px;
+}

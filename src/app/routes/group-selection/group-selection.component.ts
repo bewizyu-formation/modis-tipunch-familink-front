@@ -23,9 +23,8 @@ export class GroupSelectionComponent implements OnInit, OnDestroy {
 
   isProcessing = false;
   isUserDataFetched = false;
-  formCreateGroupMessage = '';
   nom = new FormControl('', [Validators.required]);
-  Groups: Array<Groupe> = [];
+  groupes: Array<any> = [];
 
 
   constructor(public config: ConfigService,
@@ -38,22 +37,24 @@ export class GroupSelectionComponent implements OnInit, OnDestroy {
 
   createGroup(): void {
     this.isProcessing = true;
-    if (this.nom.valid) {
 
+    if (this.nom.valid) {
       const createFormData = {
+        idUtilisateurProprietaire: this.userInfos.idUtilisateur,
+        dateDeCreation: new Date(),
         nom: this.nom.value,
       };
+
       this.groupeService.createGroup(createFormData).then(
         (createAttempt: string) => {
-          this.formCreateGroupMessage = createAttempt;
-          this.isProcessing = false;
-          if (this.formCreateGroupMessage === 'Votre groupe a bien été crée.') {
+          console.log(createAttempt);
+          if (createAttempt) {
             setTimeout(() => {
-              this.nav.router.navigate([PATH_GROUPES]);
+              this.getUserData();
+              this.isProcessing = false;
             }, 1000);
           }
         }, (error: string) => {
-          this.formCreateGroupMessage = error;
           this.isProcessing = false;
         });
     }
@@ -72,7 +73,10 @@ export class GroupSelectionComponent implements OnInit, OnDestroy {
       this.userOwnedGroup = userOwnedGroup;
     });
 
-    // fetch users datas if the user is authenticated
+    this.getUserData();
+  }
+
+  getUserData(): void {
     if (window.localStorage.getItem('token')) {
       this.authService.autoAuthFromToken().then((success) => {
         if (!success) {
@@ -82,11 +86,17 @@ export class GroupSelectionComponent implements OnInit, OnDestroy {
             this.authService.destroyAuthentication();
           });
         } else {
-          this.isUserDataFetched = true;
+          setTimeout(() => {
+            this.groupeService.getGroupesList(this.userInfos.idUtilisateur, this.userOwnedGroup.idGroupe).then(
+              (list: Array<any>) => {
+                this.groupes = list;
+                this.isUserDataFetched = true;
+              }
+            );
+          }, 1000);
         }
       });
     }
-
   }
 
   openGroup(idGroupe: number) {

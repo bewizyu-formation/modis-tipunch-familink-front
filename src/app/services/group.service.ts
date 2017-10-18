@@ -11,22 +11,37 @@ export class GroupService {
 
 
     createGroup(userCredentials: Object) {
-    return new Promise((resolve) => {
-      this.http.post( `${this.config.API_BASE}${this.config.API_ROUTES.GROUPSELECTION}`, userCredentials).subscribe(
-        (response) => {
-          if (response['description'] === 'groupe créé') {
-            resolve('Votre groupe a bien été créé.');
-          } else {
-            resolve(response['description']);
+      return new Promise((resolve) => {
+        this.http.post( `${this.config.API_BASE}${this.config.API_ROUTES.GROUPES}`, userCredentials).subscribe(
+          (response) => {
+            resolve(true);
+          },
+          (error) => {
+            resolve(false);
           }
-        },
-        (error) => {
-          resolve('Une erreur est survenue.');
-        }
-      );
+        );
       });
     }
-  /*public ge
-  return this.http.get(`${this.config.API_BASE}${this.config.API_ROUTES.PROFILS}`);*/
 
+    getGroupesList(idUtilisateur: number, userIdGroupe: number) {
+      return new Promise((resolve) => {
+        this.http.get( `${this.config.API_BASE}${this.config.API_ROUTES.CONTACTS}${idUtilisateur}` +
+          `${this.config.API_ROUTES.CONTACTSGROUPES}`).subscribe(
+          (response) => {
+            if (response['description'] === 'liste créé') {
+              resolve(
+                response['groupes'].filter((groupe) => {
+                  return groupe['0'] !== userIdGroupe;
+                })
+              );
+            } else {
+              resolve([]);
+            }
+          },
+          (error) => {
+            resolve([]);
+          }
+        );
+      });
+    }
 }
