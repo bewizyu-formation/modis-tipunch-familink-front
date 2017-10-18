@@ -9,7 +9,7 @@ import { Md5 } from 'ts-md5/dist/md5';
 import { ProfilService } from '../../services/profil.service';
 import { ConfigService } from '../../services/config.service';
 import { ContactService } from '../../services/contact.service';
-import { NavigatorService, PATH_HOME, PATH_LOGIN } from '../../services/navigator.service';
+import {NavigatorService, PATH_GROUP_SELECTION, PATH_HOME, PATH_LOGIN} from '../../services/navigator.service';
 
 @Component({
   selector: 'app-create-contact',
@@ -71,15 +71,29 @@ export class CreateContactComponent implements OnInit {
         ville: this.ville,
       };
 
-      const idGroupe = 1;
+      const createFormData2 = {
+        nom: this.requieredFormsGroup.get('nom').value,
+        prenom: this.requieredFormsGroup.get('prenom').value,
+        gravatar: `${this.config.GRAVATAR_BASE}${Md5.hashStr(this.gravatar.value).toString()}`,
+        numTel: this.requieredFormsGroup.get('numTel').value,
+        adresse: this.adresse,
+        codePostal: this.codePostal.value,
+        ville: this.ville,
+        email: this.requieredFormsGroup.get('email').value,
+        idProfil: this.requieredFormsGroup.get('profil').value,
+      };
 
-      this.contactService.createContact(parseInt(this.route.snapshot.paramMap.get('idGroupe'), 10), createFormData).then(
+
+
+
+      const idGroupe = parseInt(this.route.snapshot.paramMap.get('idGroupe'), 10);
+      this.contactService.createContact(idGroupe, createFormData2).then(
         (loginAttempt: string) => {
           this.formCreateContactMessage = loginAttempt;
           this.isProcessing = false;
-          if (this.formCreateContactMessage === 'Votre compte a été créé.') {
+          if (this.formCreateContactMessage === 'Contact créé.') {
             setTimeout(() => {
-              this.nav.router.navigate([PATH_LOGIN]);
+              this.nav.router.navigate([`${PATH_GROUP_SELECTION}/${idGroupe}`]);
             }, 1000);
           }
         }, (error: string) => {

@@ -10,8 +10,8 @@ export const PATH_FORGOT_PASSWORD = 'forgot-password';
 export const PATH_GROUP_SELECTION = 'group-selection';
 export const PATH_SELECTED_GROUP = PATH_GROUP_SELECTION + '/:idGroupe';
 export const PATH_UPDATE_PASSWORD = 'update-password/:token';
-export const PATH_GROUP_SELECTION = 'group-selection';
 export const PATH_CREATE_CONTACT = PATH_GROUP_SELECTION + '/:idGroupe/create-contact';
+export const PATH_CREATE_CONTACT_STANDALONE = '/create-contact';
 
 @Injectable()
 export class NavigatorService {
