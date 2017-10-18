@@ -1,0 +1,92 @@
+<div class="createContact-container">
+  <form class="createContact-form" (submit)="createContact()">
+    <p class="titre">Créer un Contact</p>
+
+    <div class="createContact-form-row">
+      <div class="createContact-form-col">
+        <div>
+          <label>Email : </label>
+          <mat-form-field>
+            <input matInput placeholder="Saisir email" [formControl]="requieredFormsGroup.get('email')" name="email" required />
+            <mat-error *ngIf="requieredFormsGroup.get('email').invalid">{{ getEmailErrorMessage() }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <label>Nom : </label>
+          <mat-form-field>
+            <input matInput placeholder="Saisir le nom" [formControl]="requieredFormsGroup.get('nom')" name="nom" required />
+            <mat-error *ngIf="requieredFormsGroup.get('nom').invalid">{{ getNomErrorMessage() }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <label>Prénom : </label>
+          <mat-form-field>
+            <input matInput placeholder="Saisir le prénom" [formControl]="requieredFormsGroup.get('prenom')" name="prenom" required />
+            <mat-error *ngIf="requieredFormsGroup.get('prenom').invalid">{{ getPrenomErrorMessage() }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <label>Profil : </label>
+          <mat-form-field>
+            <mat-select placeholder="Sélectionner un profil" [formControl]="requieredFormsGroup.get('profil')" name="profil" required>
+              <mat-option *ngFor="let profil of profils" [value]="profil.idProfil">
+                {{ profil.nom }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="requieredFormsGroup.get('profil').invalid">{{ getProfilErrorMessage() }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="createContact-form-col">
+        <div>
+          <label>Gravatar : </label>
+          <mat-form-field>
+            <input matInput placeholder="Saisir le gravatar" [formControl]="gravatar" name="gravatar" />
+            <mat-error *ngIf="gravatar.invalid">{{ getGravatarErrorMessage() }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <label>Adresse : </label>
+          <mat-form-field>
+            <input matInput placeholder="Saisir l'adresse" [(ngModel)]="adresse" name="adresse"/>
+          </mat-form-field>
+        </div>
+        <div>
+          <label>Code postal : </label>
+          <mat-form-field>
+            <input matInput placeholder="Saisir le code postal" [formControl]="codePostal" name="codePostal" />
+            <mat-error *ngIf="codePostal.invalid">{{ getCodePostalErrorMessage() }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <label>Ville : </label>
+          <mat-form-field>
+            <input matInput placeholder="Saisir la ville" [(ngModel)]="ville" name="ville" />
+          </mat-form-field>
+        </div>
+        <div>
+          <label>Téléphone : </label>
+          <mat-form-field>
+            <input matInput placeholder="Saisir le téléphone" [formControl]="requieredFormsGroup.get('numTel')" name="numTel" required />
+            <mat-error *ngIf="requieredFormsGroup.get('numTel').invalid">{{ getNumTelErrorMessage() }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <span class="createContact-form-message">{{ formCreateContactMessage }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="createContact-form-row">
+      <div class="createContact-form-button">
+        <button *ngIf="!isProcessing && isFormValid()" type="submit" mat-raised-button color="primary">Valider</button>
+        <button *ngIf="!isProcessing && !isFormValid()" type="submit" mat-raised-button color="primary" disabled>Valider</button>
+        <button *ngIf="isProcessing" type="submit" mat-raised-button color="primary" disabled>Création du compte  ...</button>
+      </div>
+      <div class="createContact-form-button">
+        <button mat-raised-button (click)="navigateToHome()">Annuler</button>
+      </div>
+    </div>
+  </form>
+</div>

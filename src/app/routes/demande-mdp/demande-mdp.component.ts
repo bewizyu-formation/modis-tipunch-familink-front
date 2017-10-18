@@ -39,7 +39,6 @@ export class DemandeMdpComponent implements OnInit {
         this.forgotPasswordMessage = error;
         this.loading = false;
       });
-
     }
   }
 

@@ -114,6 +114,37 @@ export class AuthenticationService {
       });
     });
   }
+  authenticateFormContact(email: string, nom: string, prenom: string, idProfil: number,
+                          gravatar: string, adresse: string, codePostal: string,
+                          ville: string, numTel: string
+  ) {
+    return new Promise((resolve) => {
+
+      const userCredentials = {
+        email: email,
+        nom: nom,
+        prenom: prenom,
+        idProfil: idProfil,
+        gravatar: gravatar,
+        adresse: adresse,
+        codePostal: codePostal,
+        ville: ville,
+        numTel: numTel
+      };
+      this.http.post(`${this.config.API_BASE}${this.config.API_ROUTES.CONTACTS}`, userCredentials).subscribe(
+        (response) => {
+          if (response['description'] === 'Contact créé') {
+            resolve('Votre contact a été créé');
+          } else {
+            resolve(response['description']);
+          }
+        },
+        (error) => {
+          resolve('Une erreur est survenue.');
+        }
+      );
+    });
+  }
 
   getUserIdFromToken(token: string): number {
     const decodedToken = atob(token);

@@ -4,7 +4,7 @@
     <input matInput [(ngModel)]="filterInputValue">
   </mat-form-field>
   <div class="listActions">
-    <button mat-icon-button>
+    <button mat-icon-button (click)="createContact()">
       <mat-icon>person_add</mat-icon>
     </button>
     <button mat-icon-button (click)="loadContactList()">

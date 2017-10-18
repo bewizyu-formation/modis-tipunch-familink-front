@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Contact} from '../../../models/Contact';
 import { ConfigService } from '../../../services/config.service';
 import { ContactService } from '../../../services/contact.service';
+import { NavigatorService } from '../../../services/navigator.service';
+import { PATH_CREATE_CONTACT_STANDALONE, PATH_GROUP_SELECTION } from '../../../services/navigator.service';
 
 
 @Component({
@@ -22,7 +24,7 @@ export class ContactListComponent implements OnInit {
 
   contacts: Array<Contact> = [];
 
-  constructor(public config: ConfigService, private contactService: ContactService) { }
+  constructor(public config: ConfigService, private contactService: ContactService, private nav: NavigatorService) { }
 
   ngOnInit() {
     this.loadContactList();
@@ -38,6 +40,10 @@ export class ContactListComponent implements OnInit {
     }, (error) => {
       console.log(error);
     });
+  }
+
+  createContact() {
+      this.nav.router.navigate([`${PATH_GROUP_SELECTION}/${this.idGroupe}${PATH_CREATE_CONTACT_STANDALONE}`]);
   }
 
   selectContact(selectedContact: Contact) {

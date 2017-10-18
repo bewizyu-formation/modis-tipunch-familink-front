@@ -19,6 +19,7 @@ export class ConfigService {
     GROUPSELECTION: 'group-selection',
     CONTACTS: 'contacts/',
     CONTACTSGROUPES: '/groupes',
+    GROUPECONTACTS: '/contact',
   };
 
   constructor() { }

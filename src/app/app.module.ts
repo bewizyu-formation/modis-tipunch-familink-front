@@ -36,6 +36,7 @@ import { LoginComponent } from './routes/login/login.component';
 import { DemandeMdpComponent } from './routes/demande-mdp/demande-mdp.component';
 import { CreateUserComponent } from './routes/create-user/create-user.component';
 import { HomeComponent } from './routes/home/home.component';
+import { CreateContactComponent } from './routes/create-contact/create-contact.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { GroupeComponent } from './routes/groupe/groupe.component';
 import { ContactListComponent } from './routes/groupe/contact-list/contact-list.component';
@@ -62,6 +63,7 @@ import { GroupService } from './services/group.service';
     ContactListPipe,
     UpdateMdpComponent,
     GroupSelectionComponent,
+    CreateContactComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,6 +93,7 @@ import { GroupService } from './services/group.service';
     ProfilService,
     ContactService,
     GroupService,
+    ContactService,
     { provide: AuthenticationService, useClass: AuthenticationService },
     { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
