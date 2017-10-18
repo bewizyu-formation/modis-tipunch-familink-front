@@ -13,7 +13,7 @@
       <div>
         <label>Password : </label>
         <mat-form-field>
-          <input matInput placeholder="Saisir password" [type]="hide ? 'password' : 'text'" [formControl]="password" required>
+          <input matInput placeholder="Saisir mot de passe" [type]="hide ? 'password' : 'text'" [formControl]="password" required>
           <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
           <mat-error *ngIf="password.invalid">{{ getPasswordErrorMessage() }}</mat-error>
         </mat-form-field>
@@ -21,7 +21,7 @@
     </div>
     <div class="login-form-row">
       <div class="login-form-action-links">
-        <a (click)="navigateToCreateAccount()">Créer un compte</a> | <a (click)="navigateToForgotPassword()">Mot de passe oublié</a>
+        <a class="login-form-action-create" (click)="navigateToCreateAccount()">Créer un compte</a> | <a class="login-form-action-forgot" (click)="navigateToForgotPassword()">Mot de passe oublié</a>
       </div>
     </div>
     <div class="login-form-row">

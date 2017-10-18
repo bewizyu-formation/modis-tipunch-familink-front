@@ -1,0 +1,6 @@
+<div class="groupe">
+  <app-contact-list
+    [idGroupe]="idGroupe"
+    (contactSelected)="handleSelectedContact($event)"></app-contact-list>
+  <app-selected-contact [selectedContact]="selectedContact"></app-selected-contact>
+</div>

@@ -16,7 +16,7 @@ export class DemandeMdpComponent implements OnInit {
 
   email = new FormControl('', [Validators.required, Validators.email]);
   loading = false;
-  forgotPasswordMessage: string; 
+  forgotPasswordMessage: string;
 
   constructor(
     public config: ConfigService,

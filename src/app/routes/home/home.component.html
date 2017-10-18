@@ -1,33 +1,38 @@
 <div class="home__container">
-<div class="header__container">
-  <div class="header__navButtons">
+  <div class="header__container">
+    <div class="header__navButtons" *ngIf="!authService.isAuthenticated">
 
-    <button mat-raised-button color="primary" class="header__navButtons__connexion" [routerLink]="path_login">Se Connecter</button>
-    <button mat-raised-button color="primary" class="header__navButtons__creerCompte" [routerLink]="path_create_account">Créer un Compte</button>
+      <button mat-raised-button color="primary" class="header__navButtons__connexion" [routerLink]="path_login">Se
+        Connecter
+      </button>
+      <button mat-raised-button color="primary" class="header__navButtons__creerCompte"
+              [routerLink]="path_create_account">Créer un Compte
+      </button>
+    </div>
+
   </div>
-
-</div>
-<div class="header__container__accroche">
-  <h1 class="header_container__accroche__title">CREER DES LIENS POUR CEUX QUI EN ONT BESOIN</h1>
-  <p class="header_container__text">Chaque jour, des dizaines de millions de personnes apportent dignité et réconfort à un être cher qui en a besoin.
-    Chez Familink, nous sommes fiers de connecter ces héros silencieux.</p>
-</div>
-<div class="body__image"></div>
-
-
-<div class="body__container">
-  <div class="body__container__col">
-    Familink est une solution applicative pour faciliter la mise en relation d’un certain
-    nombre de contact autour d’une ou plusieurs personnes agées nécessitant une attention
-    particulière.
-    <br>
-    Le but de l’application est de centraliser au sein d’une application tous les
-    interlocuteurs ainsi que leurs coordonnées.
-    <br>
-    Ainsi, que vous soyez médecin ou bien un membre de la famille, l’accès à tous les contacts est
-    facilité.
+  <div class="header__container__accroche">
+    <h1 class="header_container__accroche__title">CREER DES LIENS POUR CEUX QUI EN ONT BESOIN</h1>
+    <p class="header_container__text">Chaque jour, des dizaines de millions de personnes apportent dignité et réconfort
+      à un être cher qui en a besoin.
+      Chez Familink, nous sommes fiers de connecter ces héros silencieux.</p>
   </div>
-</div>
+  <div class="body__image"></div>
+
+
+  <div class="body__container">
+    <div class="body__container__text">
+      Familink est une solution applicative pour faciliter la mise en relation d’un certain
+      nombre de contact autour d’une ou plusieurs personnes agées nécessitant une attention
+      particulière.
+      <br>
+      Le but de l’application est de centraliser au sein d’une application tous les
+      interlocuteurs ainsi que leurs coordonnées.
+      <br>
+      Ainsi, que vous soyez médecin ou bien un membre de la famille, l’accès à tous les contacts est
+      facilité.
+    </div>
+  </div>
 </div>
 
 
